@@ -17,6 +17,8 @@ class IDataFrame
 {
 public:
 	virtual ~IDataFrame () {}
+
+	virtual FrameType get_frame_type () = 0;
 };
 
 }

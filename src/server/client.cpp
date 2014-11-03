@@ -8,7 +8,8 @@
 using namespace Wimf;
 
 Client::Client (int client_fd)
-: fd (client_fd)
+: fd (client_fd),
+  protocol (std::bind(&Client::on_new_frame, this, std::placeholders::_1))
 {
 }
 
@@ -42,3 +43,9 @@ void Client::close ()
 {
 	::close (fd);
 }
+
+void Client::on_new_frame (std::shared_ptr<DataFrames::IDataFrame> frame)
+{
+
+}
+

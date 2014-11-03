@@ -26,6 +26,8 @@ public:
 	MessageFrame (user_id from, user_id to, const std::string& message);
 
 	static std::shared_ptr<IDataFrame> parse_frame (const data_array& data, data_array::size_type pointer);
+
+	FrameType get_frame_type () override { return FrameType::MESSAGE; }
 };
 
 }

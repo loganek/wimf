@@ -17,6 +17,8 @@ private:
 	std::shared_ptr<User> user;
 	Protocol protocol;
 
+	void on_new_frame (std::shared_ptr<DataFrames::IDataFrame> frame);
+
 	void process_queries ();
 	void close ();
 

@@ -13,6 +13,11 @@
 
 using namespace Wimf;
 
+Protocol::Protocol (frame_callback callback)
+: callback (callback)
+{
+}
+
 void Protocol::append_byte(const data_type& byte)
 {
 	data [data_pointer++] = byte;
@@ -61,7 +66,10 @@ void Protocol::parse_frame ()
 	}
 
 	if (frame)
+	{
 		Logger::log ("frame parsed");
+		callback (frame);
+	}
 }
 
 // todo has to be optimized...
