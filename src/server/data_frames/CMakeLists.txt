@@ -1,0 +1,2 @@
+add_library(wimf-data-frames
+  messageframe.cpp)

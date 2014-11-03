@@ -7,6 +7,7 @@
 
 #include "protocol.h"
 #include "logger.h"
+#include "data_frames/dataframes.h"
 
 #include <cstdint>
 
@@ -17,11 +18,14 @@ void Protocol::append_byte(const data_type& byte)
 	data [data_pointer++] = byte;
 
 	if (is_frame_over ())
-		parse_frame ();
-
-	if (data_pointer == data.size ())
 	{
-		Logger::log ("client data overflow");
+		parse_frame ();
+		data_pointer = 0;
+	}
+
+	if (data_pointer == data.size () / 2)
+	{
+		Logger::log ("protocol data overflow");
 		data_pointer = 0;
 	}
 }
@@ -46,8 +50,47 @@ bool Protocol::is_frame_over () const
 
 void Protocol::parse_frame ()
 {
-	switch (data.front ())
-	{
+	FrameType type = preprocess_frame ();
+	std::shared_ptr<DataFrames::IDataFrame> frame;
 
+	switch (type)
+	{
+	case FrameType::MESSAGE:
+		frame = DataFrames::MessageFrame::parse_frame (data, data_pointer);
+		break;
 	}
+}
+
+// todo has to be optimized...
+FrameType Protocol::preprocess_frame ()
+{
+	data_array new_data;
+	bool prev_guard = false;
+	data_array::size_type ni = 0;
+
+	auto type = static_cast<FrameType> (data [0]);
+
+	for (data_array::size_type i = 1; i < data_pointer; ++i)
+	{
+		if (prev_guard)
+		{
+			if (data [i] == guard || data [i] == end_frame)
+			{
+				new_data [ni++] = guard;
+				prev_guard = false;
+				continue;
+			}
+			else
+				throw std::runtime_error ("syntax error");
+		}
+		if (data [i] == guard)
+			prev_guard = true;
+		else
+			new_data [ni++] = data [i];
+	}
+
+	data = new_data;
+	data_pointer = ni;
+
+	return type;
 }
