@@ -2,6 +2,7 @@
 #define CLIENT_H
 
 #include "user.h"
+#include "protocol.h"
 
 #include <string>
 #include <memory>
@@ -14,6 +15,7 @@ private:
 	int fd;
 
 	std::shared_ptr<User> user;
+	Protocol protocol;
 
 	void process_queries ();
 	void close ();

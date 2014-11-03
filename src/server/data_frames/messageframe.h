@@ -10,6 +10,7 @@
 
 #include "idataframe.h"
 
+#include <memory>
 #include <string>
 
 namespace Wimf {

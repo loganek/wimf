@@ -24,7 +24,7 @@ typedef data_array::value_type data_type;
 typedef std::int64_t user_id;
 
 static constexpr data_type guard = 220;
-static constexpr data_type end_frame = 0xFF ^ guard;
+static constexpr data_type end_frame = 0xFF ^ guard; // 0b00100011 = 0x23
 
 }
 

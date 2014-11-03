@@ -28,7 +28,7 @@ std::shared_ptr<IDataFrame> MessageFrame::parse_frame (const data_array& data, d
 {
 	constexpr data_array::size_type min_size = sizeof (user_id) * 2 + 1;
 
-	if (pointer >= min_size)
+	if (pointer < min_size)
 		return 0;
 
 	user_id from = convert_to<user_id> (data, pointer);

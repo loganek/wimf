@@ -32,7 +32,7 @@ void Protocol::append_byte(const data_type& byte)
 
 bool Protocol::is_frame_over () const
 {
-	if (data_pointer < 2 || data.back () != end_frame)
+	if (data_pointer < 2 || data [data_pointer - 1] != end_frame)
 		return false;
 
 	bool c = true;
@@ -59,6 +59,9 @@ void Protocol::parse_frame ()
 		frame = DataFrames::MessageFrame::parse_frame (data, data_pointer);
 		break;
 	}
+
+	if (frame)
+		Logger::log ("frame parsed");
 }
 
 // todo has to be optimized...
@@ -70,7 +73,7 @@ FrameType Protocol::preprocess_frame ()
 
 	auto type = static_cast<FrameType> (data [0]);
 
-	for (data_array::size_type i = 1; i < data_pointer; ++i)
+	for (data_array::size_type i = 1; i < data_pointer - 1; ++i)
 	{
 		if (prev_guard)
 		{
@@ -88,6 +91,9 @@ FrameType Protocol::preprocess_frame ()
 		else
 			new_data [ni++] = data [i];
 	}
+
+	if (prev_guard)
+		throw std::runtime_error ("syntax error");
 
 	data = new_data;
 	data_pointer = ni;

@@ -22,6 +22,8 @@ void Client::start ()
 		if (n <= 0)
 			break;
 
+		for (int i = 0; i < n; ++i)
+			protocol.append_byte (buff [i]);
 	}
 
 	close ();

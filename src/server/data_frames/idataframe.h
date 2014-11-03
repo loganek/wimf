@@ -10,8 +10,6 @@
 
 #include "../data_types.h"
 
-#include <memory>
-
 namespace Wimf {
 namespace DataFrames {
 
