@@ -7,10 +7,10 @@ namespace Wimf {
 
 class Logger
 {
- public:
-  virtual ~Logger () {}
-  
-  static void log (const std::string& message);
+public:
+	virtual ~Logger () {}
+
+	static void log (const std::string& message);
 };
 
 }

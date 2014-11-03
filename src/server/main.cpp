@@ -2,9 +2,9 @@
 
 int main (int argc, char **argv)
 {
-  Wimf::Server server (12345);
-  
-  server.start ();
+	Wimf::Server server (12345);
 
-  return 0;
+	server.start ();
+
+	return 0;
 }

@@ -14,21 +14,21 @@ namespace Wimf {
 
 class Server
 {
- private:
-  sockaddr_in serv_addr;
-  std::vector<Client> clients;
+private:
+	sockaddr_in serv_addr;
+	std::vector<Client> clients;
 
-  std::mutex start_stop;
-  std::atomic_bool runserv;
+	std::mutex start_stop;
+	std::atomic_bool runserv;
 
-  int sock_fd;
+	int sock_fd;
 
- public:
-  Server (int port);
-  virtual ~Server ();
+public:
+	Server (int port);
+	virtual ~Server ();
 
-  void start ();
-  void stop ();
+	void start ();
+	void stop ();
 };
 
 }

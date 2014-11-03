@@ -29,3 +29,10 @@
 
 # Backup files
 *~
+
+# Eclipse project files
+/.cproject
+/.project
+
+# build files directory
+/build

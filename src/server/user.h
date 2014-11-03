@@ -5,12 +5,12 @@ namespace Wimf {
 
 class User
 {
- private:
-  long phone;
+private:
+	long phone;
 
- public:
-  User (long phone);
-  virtual ~User () {}
+public:
+	User (long phone);
+	virtual ~User () {}
 };
 
 }
