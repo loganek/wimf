@@ -27,6 +27,10 @@ public:
 
 	static std::shared_ptr<IDataFrame> parse_frame (const data_array& data, data_array::size_type pointer);
 
+	user_id get_from () const { return from; }
+	user_id get_to () const { return to; }
+	std::string get_message () const { return message; }
+
 	FrameType get_frame_type () override { return FrameType::MESSAGE; }
 };
 

@@ -3,6 +3,7 @@
 
 #include "user.h"
 #include "protocol.h"
+#include "data_frames/dataframes.h"
 
 #include <string>
 #include <memory>
@@ -17,6 +18,7 @@ private:
 	std::shared_ptr<User> user;
 	Protocol protocol;
 
+	void message_frame (std::shared_ptr<DataFrames::MessageFrame> frame);
 	void on_new_frame (std::shared_ptr<DataFrames::IDataFrame> frame);
 
 	void process_queries ();

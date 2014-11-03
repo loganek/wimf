@@ -46,6 +46,14 @@ void Client::close ()
 
 void Client::on_new_frame (std::shared_ptr<DataFrames::IDataFrame> frame)
 {
-
+	switch (frame->get_frame_type ())
+	{
+	case FrameType::MESSAGE:
+		message_frame (std::static_pointer_cast<DataFrames::MessageFrame> (frame));
+	}
 }
 
+void Client::message_frame (std::shared_ptr<DataFrames::MessageFrame> frame)
+{
+
+}
