@@ -5,4 +5,5 @@ add_executable(wimf-server
   server.cpp
   client.cpp
   logger.cpp
+  protocol.cpp
 )

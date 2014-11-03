@@ -8,6 +8,7 @@
 using namespace Wimf;
 
 Server::Server (int port)
+: sock_fd (-1)
 {
 	memset ((char*) &serv_addr, 0, sizeof (sockaddr_in));
 	serv_addr.sin_family = AF_INET;
