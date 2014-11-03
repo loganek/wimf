@@ -19,8 +19,6 @@ class IDataFrame
 {
 public:
 	virtual ~IDataFrame () {}
-
-	static std::shared_ptr<IDataFrame> parse_frame (const data_array& data);
 };
 
 }
