@@ -32,6 +32,8 @@ public:
 	std::string get_message () const { return message; }
 
 	FrameType get_frame_type () override { return FrameType::MESSAGE; }
+
+	std::tuple<data_array, data_array::size_type> serialize () override;
 };
 
 }

@@ -10,6 +10,8 @@
 
 #include "../data_types.h"
 
+#include <tuple>
+
 namespace Wimf {
 namespace DataFrames {
 
@@ -19,6 +21,9 @@ public:
 	virtual ~IDataFrame () {}
 
 	virtual FrameType get_frame_type () = 0;
+
+	// todo it should be structure, not a tuple
+	virtual std::tuple<data_array, data_array::size_type> serialize () = 0;
 };
 
 }

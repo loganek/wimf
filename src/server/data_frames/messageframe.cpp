@@ -7,6 +7,7 @@
 
 #include "messageframe.h"
 
+#include <cstring>
 #include <stdexcept>
 #include <cassert>
 
@@ -47,3 +48,23 @@ std::shared_ptr<IDataFrame> MessageFrame::parse_frame (const data_array& data, d
 }
 
 
+std::tuple<Wimf::data_array, Wimf::data_array::size_type> MessageFrame::serialize ()
+{
+	std::tuple<data_array, data_array::size_type> ret_data;
+	data_array::size_type i = 0;
+
+	std::get<0> (ret_data) [i++] = static_cast<data_type> (FrameType::MESSAGE);
+
+	memcpy (std::get<0> (ret_data).data () + i, (data_type*)&from, sizeof (from));
+	i += sizeof (from);
+	memcpy (std::get<0> (ret_data).data () + i, (data_type*)&to, sizeof (to));
+	i += sizeof (to);
+	std::get<0> (ret_data) [i++] = message.length ();
+
+	for (auto c : message)
+		std::get<0> (ret_data) [i++] = c;
+
+	std::get<1> (ret_data) = 1 + sizeof (from) + sizeof (to) + 1 + message.length ();
+
+	return ret_data;
+}
