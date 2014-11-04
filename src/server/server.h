@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-#include <vector>
+#include <map>
 #include <atomic>
 #include <mutex>
 
@@ -16,7 +16,7 @@ class Server
 {
 private:
 	sockaddr_in serv_addr;
-	std::vector<Client> clients;
+	std::map<user_id, Client> clients;
 
 	std::mutex start_stop;
 	std::atomic_bool runserv;

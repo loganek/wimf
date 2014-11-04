@@ -49,9 +49,9 @@ void Server::start ()
 			Logger::log ("cannot accept socket");
 			continue;
 		}
-
-		clients.push_back (Client (client_sock_fd));
-		new std::thread(&Client::start, clients.back ());
+		static user_id id = 0;
+		clients [id++] = Client (client_sock_fd);
+		new std::thread(&Client::start, clients [id-1]);
 
 		Logger::log ("new client");
 	}
