@@ -29,6 +29,7 @@ class Protocol
 	bool is_frame_over () const;
 	void parse_frame ();
 	FrameType preprocess_frame ();
+	static data_array::size_type postserialize (data_array& frame);
 
 public:
 	Protocol (frame_callback callback);

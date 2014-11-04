@@ -108,3 +108,20 @@ FrameType Protocol::preprocess_frame ()
 
 	return type;
 }
+
+data_array::size_type Protocol::postserialize (data_array& data)
+{
+	data_array new_data;
+	data_array::size_type ni = 0;
+
+	for (data_array::size_type i = 0; i < data.size (); i++)
+	{
+		if (data [i] == guard || data [i] == end_frame)
+			new_data [ni++] = guard;
+		new_data [ni++] = data [i];
+	}
+
+	new_data [ni++] = end_frame;
+	data = new_data;
+	return ni;
+}
