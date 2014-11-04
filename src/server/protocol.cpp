@@ -20,29 +20,29 @@ Protocol::Protocol (frame_callback callback)
 
 void Protocol::append_byte(const data_type& byte)
 {
-	data [data_pointer++] = byte;
+	buffer.append (byte);
 
 	if (is_frame_over ())
 	{
 		parse_frame ();
-		data_pointer = 0;
+		buffer.reset ();
 	}
 
-	if (data_pointer == data.size () / 2)
+	if (buffer.get_pointer () == buffer.get_size () / 2)
 	{
 		Logger::log ("protocol data overflow");
-		data_pointer = 0;
+		buffer.reset ();
 	}
 }
 
 bool Protocol::is_frame_over () const
 {
-	if (data_pointer < 2 || data [data_pointer - 1] != end_frame)
+	if (buffer.get_pointer () < 2 || buffer [buffer.get_pointer () - 1] != end_frame)
 		return false;
 
 	bool c = true;
 
-	for (auto it = data.rbegin () - 1; it != data.rend (); ++it)
+	for (auto it = buffer.rbegin () - 1; it != buffer.rend (); ++it)
 	{
 		if (*it != guard)
 			break;
@@ -61,7 +61,7 @@ void Protocol::parse_frame ()
 	switch (type)
 	{
 	case FrameType::MESSAGE:
-		frame = DataFrames::MessageFrame::parse_frame (data, data_pointer);
+		frame = DataFrames::MessageFrame::parse_frame (buffer);
 		break;
 	}
 
@@ -75,53 +75,49 @@ void Protocol::parse_frame ()
 // todo has to be optimized...
 FrameType Protocol::preprocess_frame ()
 {
-	data_array new_data;
+	DataBuffer new_buffer;
 	bool prev_guard = false;
-	data_array::size_type ni = 0;
 
-	auto type = static_cast<FrameType> (data [0]);
+	auto type = static_cast<FrameType> (buffer [0]);
 
-	for (data_array::size_type i = 1; i < data_pointer - 1; ++i)
+	for (size_type i = 1; i < buffer.get_pointer () - 1; ++i)
 	{
 		if (prev_guard)
 		{
-			if (data [i] == guard || data [i] == end_frame)
+			if (buffer [i] == guard || buffer [i] == end_frame)
 			{
-				new_data [ni++] = guard;
+				new_buffer.append (guard);
 				prev_guard = false;
 				continue;
 			}
 			else
 				throw std::runtime_error ("syntax error");
 		}
-		if (data [i] == guard)
+		if (buffer [i] == guard)
 			prev_guard = true;
 		else
-			new_data [ni++] = data [i];
+			new_buffer.append (buffer [i]);
 	}
 
 	if (prev_guard)
 		throw std::runtime_error ("syntax error");
 
-	data = new_data;
-	data_pointer = ni;
+	buffer = new_buffer;
 
 	return type;
 }
 
-data_array::size_type Protocol::postserialize (data_array& data)
+void Protocol::postserialize (DataBuffer& buffer)
 {
-	data_array new_data;
-	data_array::size_type ni = 0;
+	DataBuffer new_buffer;
 
-	for (data_array::size_type i = 0; i < data.size (); i++)
+	for (size_type i = 0; i < buffer.get_pointer (); i++)
 	{
-		if (data [i] == guard || data [i] == end_frame)
-			new_data [ni++] = guard;
-		new_data [ni++] = data [i];
+		if (buffer [i] == guard || buffer [i] == end_frame)
+			new_buffer.append (guard);
+		new_buffer.append (buffer [i]);
 	}
 
-	new_data [ni++] = end_frame;
-	data = new_data;
-	return ni;
+	new_buffer.append (end_frame);
+	buffer = new_buffer;
 }

@@ -9,6 +9,7 @@
 #define IDATAFRAME_H_
 
 #include "../data_types.h"
+#include "../databuffer.h"
 
 #include <tuple>
 
@@ -23,7 +24,7 @@ public:
 	virtual FrameType get_frame_type () = 0;
 
 	// todo it should be structure, not a tuple
-	virtual std::tuple<data_array, data_array::size_type> serialize () = 0;
+	virtual DataBuffer serialize () = 0;
 };
 
 }

@@ -8,6 +8,7 @@ add_executable(wimf-server
   client.cpp
   logger.cpp
   protocol.cpp
+  databuffer.cpp
 )
 
 target_link_libraries (wimf-server wimf-data-frames)

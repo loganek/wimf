@@ -25,7 +25,7 @@ public:
 	virtual ~MessageFrame () {}
 	MessageFrame (user_id from, user_id to, const std::string& message);
 
-	static std::shared_ptr<IDataFrame> parse_frame (const data_array& data, data_array::size_type pointer);
+	static std::shared_ptr<IDataFrame> parse_frame (const DataBuffer& buffer);
 
 	user_id get_from () const { return from; }
 	user_id get_to () const { return to; }
@@ -33,7 +33,7 @@ public:
 
 	FrameType get_frame_type () override { return FrameType::MESSAGE; }
 
-	std::tuple<data_array, data_array::size_type> serialize () override;
+	DataBuffer serialize () override;
 };
 
 }

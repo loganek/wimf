@@ -8,6 +8,8 @@
 #ifndef DATA_TYPES_H_
 #define DATA_TYPES_H_
 
+#include "databuffer.h"
+
 #include <array>
 #include <cstdint>
 
@@ -18,13 +20,13 @@ enum class FrameType
 	MESSAGE = 0,
 };
 
-typedef std::array<unsigned char, 128> data_array;
-typedef data_array::value_type data_type;
+typedef DataBuffer::data_type data_type;
+typedef DataBuffer::data_array::size_type size_type;
 
 typedef std::int64_t user_id;
 
-static constexpr data_type guard = 220;
-static constexpr data_type end_frame = 0xFF ^ guard; // 0b00100011 = 0x23
+static constexpr DataBuffer::data_type guard = 220;
+static constexpr DataBuffer::data_type end_frame = 0xFF ^ guard; // 0b00100011 = 0x23
 
 }
 

@@ -14,33 +14,33 @@
 using namespace Wimf::DataFrames;
 
 template<typename T>
-T convert_to(const Wimf::data_array& data, Wimf::data_array::size_type start)
+T convert_to(const Wimf::DataBuffer& buffer, Wimf::size_type start)
 {
-	assert (data.size () >= start + sizeof (T));
+	assert (buffer.get_size () >= start + sizeof (T));
 
-	return *((T*)data.data ());
+	return *((T*)buffer.get_data());
 }
 
 MessageFrame::MessageFrame (user_id from, user_id to, const std::string& message)
 : from (from), to (to), message (message)
 {}
 
-std::shared_ptr<IDataFrame> MessageFrame::parse_frame (const data_array& data, data_array::size_type pointer)
+std::shared_ptr<IDataFrame> MessageFrame::parse_frame (const Wimf::DataBuffer& buffer)
 {
-	constexpr data_array::size_type min_size = sizeof (user_id) * 2 + 1;
+	constexpr size_type min_size = sizeof (user_id) * 2 + 1;
 
-	if (pointer < min_size)
+	if (buffer.get_pointer () < min_size)
 		return 0;
 
-	user_id from = convert_to<user_id> (data, pointer);
-	user_id to = convert_to<user_id> (data, pointer + sizeof (user_id));
-	data_type msg_len = data [min_size - 1];
+	user_id from = convert_to<user_id> (buffer, 0);
+	user_id to = convert_to<user_id> (buffer, sizeof (user_id));
+	data_type msg_len = buffer [min_size - 1];
 
-	if (msg_len + min_size != pointer)
+	if (msg_len + min_size != buffer.get_pointer ())
 		throw std::runtime_error ("message length not equals...");
 
 	std::string message;
-	message.assign ((const char*)(data.data () + min_size), msg_len);
+	message.assign ((const char*)(buffer.get_data () + min_size), msg_len);
 
 	auto frame = new MessageFrame (from, to, message);
 
@@ -48,23 +48,20 @@ std::shared_ptr<IDataFrame> MessageFrame::parse_frame (const data_array& data, d
 }
 
 
-std::tuple<Wimf::data_array, Wimf::data_array::size_type> MessageFrame::serialize ()
+Wimf::DataBuffer MessageFrame::serialize ()
 {
-	std::tuple<data_array, data_array::size_type> ret_data;
-	data_array::size_type i = 0;
+	Wimf::DataBuffer ret_data;
+	ret_data.append (static_cast<data_type> (FrameType::MESSAGE));
 
-	std::get<0> (ret_data) [i++] = static_cast<data_type> (FrameType::MESSAGE);
+	for (size_t i = 0; i < sizeof (from); i++)
+		ret_data.append (((data_type*)&from) [i]);
+	for (size_t i = 0; i < sizeof (to); i++)
+		ret_data.append (((data_type*)&to) [i]);
 
-	memcpy (std::get<0> (ret_data).data () + i, (data_type*)&from, sizeof (from));
-	i += sizeof (from);
-	memcpy (std::get<0> (ret_data).data () + i, (data_type*)&to, sizeof (to));
-	i += sizeof (to);
-	std::get<0> (ret_data) [i++] = message.length ();
+	ret_data.append (message.length ());
 
 	for (auto c : message)
-		std::get<0> (ret_data) [i++] = c;
-
-	std::get<1> (ret_data) = 1 + sizeof (from) + sizeof (to) + 1 + message.length ();
+		ret_data.append (c);
 
 	return ret_data;
 }

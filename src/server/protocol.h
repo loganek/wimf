@@ -10,6 +10,7 @@
 
 #include "data_types.h"
 #include "data_frames/idataframe.h"
+#include "databuffer.h"
 
 #include <memory>
 #include <functional>
@@ -21,15 +22,13 @@ class Protocol
 {
 	typedef std::function<void(std::shared_ptr<DataFrames::IDataFrame> frame)> frame_callback;
 
-	data_array data;
-	data_array::size_type data_pointer = 0;
-
+	DataBuffer buffer;
 	frame_callback callback;
 
 	bool is_frame_over () const;
 	void parse_frame ();
 	FrameType preprocess_frame ();
-	static data_array::size_type postserialize (data_array& frame);
+	static void postserialize (DataBuffer& buffer);
 
 public:
 	Protocol (frame_callback callback);
