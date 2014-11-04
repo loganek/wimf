@@ -49,9 +49,9 @@ void Server::start ()
 			Logger::log ("cannot accept socket");
 			continue;
 		}
-		static user_id id = 0;
-		clients [id++] = Client (client_sock_fd);
-		new std::thread(&Client::start, clients [id-1]);
+		static user_id id = 0; // todo temporary
+		clients.emplace (id++, Client (client_sock_fd, shared_from_this ()));
+		new std::thread(&Client::start, clients.find (id-1)->second); // todo memleak
 
 		Logger::log ("new client");
 	}

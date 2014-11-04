@@ -10,12 +10,15 @@
 
 namespace Wimf {
 
+class Server;
+
 class Client
 {
 private:
 	int fd;
 
 	std::shared_ptr<User> user;
+	std::shared_ptr<Server> parent;
 	Protocol protocol;
 
 	void message_frame (std::shared_ptr<DataFrames::MessageFrame> frame);
@@ -25,7 +28,7 @@ private:
 	void close ();
 
 public:
-	Client (int client_fd);
+	Client (int client_fd, std::shared_ptr<Server> parent_server);
 	virtual ~Client () {}
 
 	void start ();

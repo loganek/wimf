@@ -7,8 +7,9 @@
 
 using namespace Wimf;
 
-Client::Client (int client_fd)
+Client::Client (int client_fd, std::shared_ptr<Server> parent_server)
 : fd (client_fd),
+  parent (parent_server),
   protocol (std::bind(&Client::on_new_frame, this, std::placeholders::_1))
 {
 }

@@ -12,7 +12,7 @@
 
 namespace Wimf {
 
-class Server
+class Server : public std::enable_shared_from_this<Server>
 {
 private:
 	sockaddr_in serv_addr;
@@ -29,6 +29,8 @@ public:
 
 	void start ();
 	void stop ();
+
+	void send_to (user_id user, const DataBuffer& buffer);
 };
 
 }
