@@ -9,9 +9,9 @@ int main (int argc, char **argv)
 		return 0;
 	}
 
-	Wimf::Server server (atoi (argv[1]));
+	auto server = std::make_shared<Wimf::Server> (atoi (argv[1]));
 
-	server.start ();
+	server->start ();
 
 	return 0;
 }
