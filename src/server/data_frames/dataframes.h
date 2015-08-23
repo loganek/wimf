@@ -9,6 +9,7 @@
 #define DATAFRAMES_H_
 
 #include "idataframe.h"
+#include "helloframe.h"
 #include "messageframe.h"
 
 #endif /* DATAFRAMES_H_ */

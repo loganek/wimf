@@ -1,2 +1,3 @@
 add_library(wimf-data-frames
-  messageframe.cpp)
+  messageframe.cpp
+  helloframe.cpp)

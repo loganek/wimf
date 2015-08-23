@@ -51,10 +51,16 @@ void Client::on_new_frame (std::shared_ptr<DataFrames::IDataFrame> frame)
 	{
 	case FrameType::MESSAGE:
 		message_frame (std::static_pointer_cast<DataFrames::MessageFrame> (frame));
+		break;
+	case FrameType::HELLO:
+		hello_frame (std::static_pointer_cast<DataFrames::HelloFrame> (frame));
 	}
 }
 
 void Client::message_frame (std::shared_ptr<DataFrames::MessageFrame> frame)
 {
+}
 
+void Client::hello_frame (std::shared_ptr<DataFrames::HelloFrame> frame)
+{
 }

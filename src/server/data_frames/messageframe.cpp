@@ -6,20 +6,12 @@
  */
 
 #include "messageframe.h"
+#include "utils.h"
 
 #include <cstring>
 #include <stdexcept>
-#include <cassert>
 
 using namespace Wimf::DataFrames;
-
-template<typename T>
-T convert_to(const Wimf::DataBuffer& buffer, Wimf::size_type start)
-{
-	assert (buffer.get_size () >= start + sizeof (T));
-
-	return *((T*)buffer.get_data());
-}
 
 MessageFrame::MessageFrame (user_id from, user_id to, const std::string& message)
 : from (from), to (to), message (message)

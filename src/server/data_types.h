@@ -18,6 +18,7 @@ namespace Wimf {
 enum class FrameType
 {
 	MESSAGE = 0,
+	HELLO = 1
 };
 
 typedef DataBuffer::data_type data_type;
