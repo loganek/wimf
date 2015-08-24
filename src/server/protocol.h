@@ -28,13 +28,14 @@ class Protocol
 	bool is_frame_over () const;
 	void parse_frame ();
 	FrameType preprocess_frame ();
-	static void postserialize (DataBuffer& buffer);
 
 public:
 	Protocol (frame_callback callback);
 	virtual ~Protocol () {}
 
 	void append_byte (const data_type& byte);
+
+	static void postserialize (DataBuffer& buffer);
 };
 
 }

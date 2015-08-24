@@ -1,5 +1,6 @@
 #include "client.h"
 #include "server.h"
+#include "logger.h"
 
 #include <sys/socket.h>
 
@@ -36,6 +37,7 @@ void Client::send_message (std::shared_ptr<DataFrames::IDataFrame> frame) const
 {
 	DataBuffer buff = frame->serialize();
 
+	Protocol::postserialize (buff);
 	send (fd, buff.get_data(), buff.get_pointer(), 0);
 }
 
@@ -75,4 +77,5 @@ void Client::message_frame (std::shared_ptr<DataFrames::MessageFrame> frame)
 void Client::hello_frame (std::shared_ptr<DataFrames::HelloFrame> frame)
 {
 	user = std::make_shared<User> (frame->get_id ());
+	Wimf::Logger::log ("Have client id: " + std::to_string (frame->get_id()));
 }
