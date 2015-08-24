@@ -1,16 +1,20 @@
 #ifndef USER_H
 #define USER_H
 
+#include "data_types.h"
+
 namespace Wimf {
 
 class User
 {
 private:
-	long phone;
+	user_id id;
 
 public:
-	User (long phone);
+	User (user_id id) : id (id) {}
 	virtual ~User () {}
+
+	user_id get_id () const { return id; }
 };
 
 }

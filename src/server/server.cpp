@@ -4,6 +4,7 @@
 #include <cstring>
 #include <thread>
 #include <stdexcept>
+#include <algorithm>
 
 using namespace Wimf;
 
@@ -49,9 +50,9 @@ void Server::start ()
 			Logger::log ("cannot accept socket");
 			continue;
 		}
-		static user_id id = 0; // todo temporary
-		clients.emplace (id++, Client (client_sock_fd, shared_from_this ()));
-		new std::thread(&Client::start, clients.find (id-1)->second); // todo memleak
+
+		clients.emplace (client_sock_fd, Client (client_sock_fd, shared_from_this ()));
+		std::thread(&Client::start, clients.find (client_sock_fd)->second).detach();
 
 		Logger::log ("new client");
 	}
@@ -63,3 +64,13 @@ void Server::stop ()
 	std::lock_guard<std::mutex> lock (start_stop);
 }
 
+boost::optional<Client> Server::get_client (user_id user)
+{
+	auto it = std::find_if (clients.begin (), clients.end () , [user] (const std::pair<int, Client>& c){
+		auto u = c.second.get_user ();
+		return (u && u->get_id() == user);
+	});
+
+	if (it != clients.end()) return it->second;
+	else return boost::none;
+}

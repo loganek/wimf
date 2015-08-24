@@ -1,4 +1,5 @@
 #include "client.h"
+#include "server.h"
 
 #include <sys/socket.h>
 
@@ -31,9 +32,11 @@ void Client::start ()
 	close ();
 }
 
-void Client::send_message (const std::string& message) const
+void Client::send_message (std::shared_ptr<DataFrames::IDataFrame> frame) const
 {
-	send (fd, message.c_str(), message.length(), 0);
+	DataBuffer buff = frame->serialize();
+
+	send (fd, buff.get_data(), buff.get_pointer(), 0);
 }
 
 void Client::process_queries ()
@@ -59,8 +62,17 @@ void Client::on_new_frame (std::shared_ptr<DataFrames::IDataFrame> frame)
 
 void Client::message_frame (std::shared_ptr<DataFrames::MessageFrame> frame)
 {
+	auto client = parent->get_client (frame->get_to ());
+
+	if (!client)
+	{
+		return;
+	}
+
+	client.get().send_message (frame);
 }
 
 void Client::hello_frame (std::shared_ptr<DataFrames::HelloFrame> frame)
 {
+	user = std::make_shared<User> (frame->get_id ());
 }
