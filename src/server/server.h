@@ -33,6 +33,8 @@ public:
 	void stop ();
 
 	boost::optional<Client> get_client (user_id id);
+
+	void remove_client (int sock_fd);
 };
 
 }

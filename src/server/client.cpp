@@ -47,6 +47,7 @@ void Client::process_queries ()
 
 void Client::close ()
 {
+	parent->remove_client (fd);
 	::close (fd);
 }
 

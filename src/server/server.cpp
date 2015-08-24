@@ -74,3 +74,9 @@ boost::optional<Client> Server::get_client (user_id user)
 	if (it != clients.end()) return it->second;
 	else return boost::none;
 }
+
+void Server::remove_client (int sock_fd)
+{
+	clients.erase (sock_fd);
+	Wimf::Logger::log ("client removed");
+}
