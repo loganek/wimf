@@ -19,7 +19,7 @@ T convert_to(const DataBuffer& buffer, size_type start)
 {
 	assert (buffer.get_size () >= start + sizeof (T));
 
-	return *((T*)buffer.get_data());
+	return *((T*)(start + buffer.get_data()));
 }
 
 }

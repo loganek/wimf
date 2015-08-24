@@ -53,6 +53,7 @@ void Client::close ()
 
 void Client::on_new_frame (std::shared_ptr<DataFrames::IDataFrame> frame)
 {
+	Wimf::Logger::log ("Have frame of type: " + std::to_string ((int) frame->get_frame_type ()));
 	switch (frame->get_frame_type ())
 	{
 	case FrameType::MESSAGE:
@@ -71,8 +72,8 @@ void Client::message_frame (std::shared_ptr<DataFrames::MessageFrame> frame)
 	{
 		return;
 	}
-
-	client.get().send_message (frame);
+	Wimf::Logger::log ("send message");
+	client->send_message (frame);
 }
 
 void Client::hello_frame (std::shared_ptr<DataFrames::HelloFrame> frame)

@@ -13,6 +13,7 @@
 #include <netinet/in.h>
 #include <netdb.h>
 
+#include <thread>
 #include <cstdlib>
 #include <cstdio>
 #include <unistd.h>
@@ -41,8 +42,8 @@ int main (int argc, char **argv)
 		return 1;
 	}
 
+	Wimf::user_id client_id = atoi (argv [1]);
 	sockaddr_in serv_addr;
-	char buffer[256];
 
 	int sockfd = socket (AF_INET, SOCK_STREAM, 0);
 	if (sockfd < 0)
@@ -68,17 +69,40 @@ int main (int argc, char **argv)
 		error ("ERROR connecting");
 	}
 
-	if (send_hello (sockfd, atoi (argv [1])) < 0)
+	if (send_hello (sockfd, client_id) < 0)
 	{
 		error ("ERROR writing to socket HELLO message");
 	}
 
-	bzero (buffer, 256);
-	if (read (sockfd, buffer, 255) < 0)
-	{
-		error ("ERROR reading from socket");
-	}
-	std::cout << buffer << std::endl;
+	std::thread th([sockfd] {
+		Wimf::Protocol protocol ([](std::shared_ptr<Wimf::DataFrames::IDataFrame> frame){
+			std::cout << "Have message " << (int)frame->get_frame_type() << std::endl;
+			if (frame->get_frame_type() == Wimf::FrameType::MESSAGE) {
+				auto msg = std::static_pointer_cast<Wimf::DataFrames::MessageFrame>(frame);
+				std::cout << "Message from: " << msg->get_from() << ": " << msg->get_message() << std::endl;
+			}
+		});
+
+		char buffer [256];
+		int n = 0;
+		while ((n = read (sockfd, buffer, 255)) >= 0)
+		{
+			for (int i = 0; i < n; i++)
+				protocol.append_byte(buffer [i]);
+		}
+	});
+
+	std::string msg = "witaj"; Wimf::user_id dest_id;
+	Wimf::DataBuffer buf;
+	do {
+		std::cin >> dest_id;
+		//std::getline (std::cin, msg);
+		Wimf::DataFrames::MessageFrame msg_frame (client_id, dest_id, msg);
+		buf = msg_frame.serialize();
+		Wimf::Protocol::postserialize(buf);
+		write (sockfd, buf.get_data(), buf.get_pointer());
+	} while (dest_id != -1);
+
 	close (sockfd);
 
 	return 0;

@@ -3,8 +3,6 @@
 
 #include "client.h"
 
-#include <boost/optional/optional.hpp>
-
 #include <sys/socket.h>
 #include <netinet/in.h>
 
@@ -18,7 +16,7 @@ class Server : public std::enable_shared_from_this<Server>
 {
 private:
 	sockaddr_in serv_addr;
-	std::map<int, Client> clients;
+	std::map<int, std::shared_ptr<Client>> clients;
 
 	std::mutex start_stop;
 	std::atomic_bool runserv;
@@ -32,7 +30,7 @@ public:
 	void start ();
 	void stop ();
 
-	boost::optional<Client> get_client (user_id id);
+	std::shared_ptr<Client> get_client (user_id id);
 
 	void remove_client (int sock_fd);
 };

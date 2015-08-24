@@ -29,7 +29,7 @@ std::shared_ptr<IDataFrame> MessageFrame::parse_frame (const Wimf::DataBuffer& b
 	data_type msg_len = buffer [min_size - 1];
 
 	if (msg_len + min_size != buffer.get_pointer ())
-		throw std::runtime_error ("message length not equals...");
+		throw std::runtime_error ("message length does not equal...");
 
 	std::string message;
 	message.assign ((const char*)(buffer.get_data () + min_size), msg_len);

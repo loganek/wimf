@@ -40,6 +40,9 @@ public:
 
 	data_array::const_reverse_iterator rbegin ()  const { return data.rbegin (); }
 	data_array::const_reverse_iterator rend () const { return data.rend (); }
+
+	data_array::const_iterator begin ()  const { return data.begin (); }
+	data_array::const_iterator end () const { return data.end (); }
 };
 
 }
