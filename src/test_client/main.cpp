@@ -5,6 +5,9 @@
  *      Author: loganek
  */
 
+#include "protocol/protocol.h"
+#include "protocol/data_frames/dataframes.h"
+
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -22,17 +25,12 @@ void error(const char *msg)
 	exit(1);
 }
 
-int send_hello (int sock_fd, std::int64_t id)
+int send_hello (int sock_fd, Wimf::user_id id)
 {
-	char data [sizeof (id) + 2];
-	size_t i = 1;
-	data [0] = 1;
-
-	for (; i < sizeof (id)+1; i++)
-		data [i] = (((char*)&id) [i-1]);
-
-	data [i] = 0xFF ^ 220;
-	return write (sock_fd, data, sizeof (id) + 2);
+	Wimf::DataFrames::HelloFrame frame (id);
+	Wimf::DataBuffer buff = frame.serialize();
+	Wimf::Protocol::postserialize(buff);
+	return write (sock_fd, buff.get_data(), buff.get_pointer());
 }
 
 int main (int argc, char **argv)
