@@ -7,6 +7,7 @@
 
 #include <string>
 #include <memory>
+#include <vector>
 
 namespace Wimf {
 
@@ -35,7 +36,7 @@ public:
 	virtual ~Client () {}
 
 	void start ();
-	void send_message (std::shared_ptr<DataFrames::IDataFrame> frame) const;
+	void send_frame (std::shared_ptr<DataFrames::IDataFrame> frame) const;
 
 	std::shared_ptr<User> get_user () const { return user; }
 };

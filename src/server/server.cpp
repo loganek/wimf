@@ -82,3 +82,19 @@ void Server::remove_client (int sock_fd)
 	clients.erase (sock_fd);
 	Wimf::Logger::log ("client removed");
 }
+
+std::vector<std::shared_ptr<Client>> Server::get_clients_from_location (double latitude, double longitude)
+{
+	std::vector<std::shared_ptr<Client>> ok_clients;
+
+	for (auto client : clients)
+	{
+		auto user = client.second->get_user ();
+		if (user && user->in_range (latitude, longitude))
+		{
+			ok_clients.push_back (client.second);
+		}
+	}
+
+	return ok_clients;
+}

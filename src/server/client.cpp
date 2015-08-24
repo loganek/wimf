@@ -33,7 +33,7 @@ void Client::start ()
 	close ();
 }
 
-void Client::send_message (std::shared_ptr<DataFrames::IDataFrame> frame) const
+void Client::send_frame (std::shared_ptr<DataFrames::IDataFrame> frame) const
 {
 	DataBuffer buff = frame->serialize();
 
@@ -76,7 +76,7 @@ void Client::message_frame (std::shared_ptr<DataFrames::MessageFrame> frame)
 		return;
 	}
 	Wimf::Logger::log ("send message");
-	client->send_message (frame);
+	client->send_frame (frame);
 }
 
 void Client::hello_frame (std::shared_ptr<DataFrames::HelloFrame> frame)
@@ -88,4 +88,11 @@ void Client::hello_frame (std::shared_ptr<DataFrames::HelloFrame> frame)
 void Client::location_frame (std::shared_ptr<DataFrames::LocationFrame> frame)
 {
 	user->set_coords (frame->get_latitude (), frame->get_longitude ());
+
+	auto clients = parent->get_clients_from_location (frame->get_latitude (), frame->get_longitude ());
+
+	for (auto client : clients)
+	{
+		client->send_frame (frame);
+	}
 }
