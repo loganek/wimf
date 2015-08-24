@@ -2,8 +2,8 @@
 #define CLIENT_H
 
 #include "user.h"
-#include "protocol.h"
-#include "data_frames/dataframes.h"
+#include "protocol/protocol.h"
+#include "protocol/data_frames/dataframes.h"
 
 #include <string>
 #include <memory>

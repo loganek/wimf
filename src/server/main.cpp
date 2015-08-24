@@ -1,5 +1,5 @@
 #include "server.h"
-#include "logger.h"
+#include "protocol/logger.h"
 
 int main (int argc, char **argv)
 {

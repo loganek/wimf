@@ -1,7 +1,7 @@
 #ifndef USER_H
 #define USER_H
 
-#include "data_types.h"
+#include "protocol/data_types.h"
 
 namespace Wimf {
 
