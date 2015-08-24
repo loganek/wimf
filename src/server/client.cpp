@@ -61,6 +61,9 @@ void Client::on_new_frame (std::shared_ptr<DataFrames::IDataFrame> frame)
 		break;
 	case FrameType::HELLO:
 		hello_frame (std::static_pointer_cast<DataFrames::HelloFrame> (frame));
+	case FrameType::LOCATION:
+		location_frame (std::static_pointer_cast<DataFrames::LocationFrame> (frame));
+		break;
 	}
 }
 
@@ -80,4 +83,9 @@ void Client::hello_frame (std::shared_ptr<DataFrames::HelloFrame> frame)
 {
 	user = std::make_shared<User> (frame->get_id ());
 	Wimf::Logger::log ("Have client id: " + std::to_string (frame->get_id()));
+}
+
+void Client::location_frame (std::shared_ptr<DataFrames::LocationFrame> frame)
+{
+	user->set_coords (frame->get_latitude (), frame->get_longitude ());
 }

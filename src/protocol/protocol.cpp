@@ -66,6 +66,9 @@ void Protocol::parse_frame ()
 	case FrameType::HELLO:
 		frame = DataFrames::HelloFrame::parse_frame (buffer);
 		break;
+	case FrameType::LOCATION:
+		frame = DataFrames::LocationFrame::parse_frame (buffer);
+		break;
 	}
 
 	if (frame)

@@ -18,16 +18,20 @@ namespace Wimf {
 enum class FrameType
 {
 	MESSAGE = 0,
-	HELLO = 1
+	HELLO = 1,
+	LOCATION = 2
 };
 
 typedef DataBuffer::data_type data_type;
 typedef DataBuffer::data_array::size_type size_type;
 
 typedef std::int64_t user_id;
+typedef std::int64_t location_serialized_type;
 
 static constexpr DataBuffer::data_type guard = 220;
 static constexpr DataBuffer::data_type end_frame = 0xFF ^ guard; // 0b00100011 = 0x23
+
+static constexpr double location_divisor = 100000.0;
 
 }
 

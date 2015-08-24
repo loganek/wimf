@@ -11,5 +11,6 @@
 #include "idataframe.h"
 #include "helloframe.h"
 #include "messageframe.h"
+#include "locationframe.h"
 
 #endif /* DATAFRAMES_H_ */

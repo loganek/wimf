@@ -23,6 +23,8 @@ private:
 
 	void message_frame (std::shared_ptr<DataFrames::MessageFrame> frame);
 	void hello_frame (std::shared_ptr<DataFrames::HelloFrame> frame);
+	void location_frame (std::shared_ptr<DataFrames::LocationFrame> frame);
+
 	void on_new_frame (std::shared_ptr<DataFrames::IDataFrame> frame);
 
 	void process_queries ();

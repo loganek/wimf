@@ -11,7 +11,7 @@
 #include "../data_types.h"
 #include "../databuffer.h"
 
-#include <tuple>
+#include <memory>
 
 namespace Wimf {
 namespace DataFrames {
