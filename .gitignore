@@ -36,3 +36,11 @@
 
 # build files directory
 /build
+
+# android-client
+.gradle
+.DS_Store
+/src/android-client/local.properties
+/src/android-client/.idea/workspace.xml
+/src/android-client/.idea/libraries
+/src/android-client/build
