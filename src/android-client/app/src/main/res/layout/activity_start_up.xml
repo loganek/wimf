@@ -13,7 +13,8 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="WIMF!"
             android:id="@+id/textView3"
@@ -21,7 +22,8 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Nick:"
             android:id="@+id/textView"
@@ -32,7 +34,8 @@
 
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="4"
             android:inputType="text"
             android:ems="10"
             android:id="@+id/nickEditText"
@@ -41,7 +44,8 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Avatar:"
             android:id="@+id/textView2"
@@ -50,16 +54,17 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="14"
             android:id="@+id/avatarImageView"
             android:src="@mipmap/anonymous"
             android:layout_centerHorizontal="true"
-            android:onClick="pickAvatar_avatarImageView_click"
-            android:layout_weight="1" />
+            android:onClick="pickAvatar_avatarImageView_click" />
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="4"
             android:text="Join!"
             android:id="@+id/joinButton"
             android:layout_alignParentBottom="true"
