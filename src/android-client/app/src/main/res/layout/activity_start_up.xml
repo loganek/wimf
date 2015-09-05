@@ -51,9 +51,10 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView"
+            android:id="@+id/avatarImageView"
             android:src="@mipmap/anonymous"
             android:layout_centerHorizontal="true"
+            android:onClick="pickAvatar_avatarImageView_click"
             android:layout_weight="1" />
 
         <Button
