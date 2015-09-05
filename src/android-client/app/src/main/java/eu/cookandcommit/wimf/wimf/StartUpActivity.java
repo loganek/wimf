@@ -4,20 +4,21 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 public class StartUpActivity extends AppCompatActivity {
     private EditText nickEditText;
     private ImageView avatarImageView;
+    WimfApplication application;
+    String avatarImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +30,21 @@ public class StartUpActivity extends AppCompatActivity {
 
         avatarImageView = (ImageView) findViewById(R.id.avatarImageView);
         assert avatarImageView != null;
+
+        application = (WimfApplication) getApplication();
+        assert application != null;
+
+        avatarImage = application.AVATAR_DEFAULT_URI;
     }
 
     public void join_joinButton_click(View v) {
-        if (TextUtils.isEmpty(nickEditText.getText())) {
+        String nickName = nickEditText.getText().toString();
+        if (nickIsValid(nickName)) {
+            Intent main = new Intent(this, MainActivity.class);
+            main.putExtra(application.NICK_MSG_VAR, nickName);
+            main.putExtra(application.AVATAR_URI_MSG_VAR, avatarImage);
+            startActivity(main);
+        } else {
             showEmptyNickWarning();
         }
     }
@@ -56,7 +68,8 @@ public class StartUpActivity extends AppCompatActivity {
                             startActivityForResult(pickAvatar, which);
                         }
                     }
-                }).show();
+                }).show()
+                .setCanceledOnTouchOutside(true);
     }
 
     @Override
@@ -77,7 +90,10 @@ public class StartUpActivity extends AppCompatActivity {
                 break;
         }
 
-        avatarImageView.setImageURI(avatar);
+        if (avatar != null) {
+            avatarImageView.setImageURI(avatar);
+            avatarImage = avatar.toString();
+        }
     }
 
     private void showEmptyNickWarning() {
@@ -93,6 +109,10 @@ public class StartUpActivity extends AppCompatActivity {
                 .setIcon(android.R.drawable.ic_dialog_info)
                 .show()
                 .setCanceledOnTouchOutside(true);
+    }
+
+    private boolean nickIsValid(String nick) {
+        return !TextUtils.isEmpty(nick);
     }
 
     @Override

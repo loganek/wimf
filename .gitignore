@@ -44,3 +44,4 @@
 /src/android-client/.idea/workspace.xml
 /src/android-client/.idea/libraries
 /src/android-client/build
+/src/android-client/app/src/main/res/values/private_keys.xml
