@@ -1,4 +1,4 @@
-package eu.cookandcommit.wimf.wimf;
+package eu.cookandcommit.wimf;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -8,8 +8,6 @@ import android.view.MenuItem;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends FragmentActivity
 implements OnMapReadyCallback {

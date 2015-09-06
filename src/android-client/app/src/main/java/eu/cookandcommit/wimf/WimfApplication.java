@@ -1,4 +1,4 @@
-package eu.cookandcommit.wimf.wimf;
+package eu.cookandcommit.wimf;
 
 import android.app.Application;
 import android.widget.ImageView;
