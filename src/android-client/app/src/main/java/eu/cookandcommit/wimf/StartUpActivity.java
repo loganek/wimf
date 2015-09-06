@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,9 +19,18 @@ import com.google.android.gms.maps.model.LatLng;
 public class StartUpActivity extends Activity implements ProtocolListener {
     private EditText nickEditText;
     private ImageView avatarImageView;
-    WimfApplication application;
-    String avatarImage;
+    private WimfApplication application;
+    private String avatarImage;
     private Server server;
+    private Handler handler = new Handler();
+
+    private Runnable userRegistredRunnable = new Runnable() {
+        @Override
+        public void run() {
+            server.disconnect();
+            showAlert("Connection error", "Can not login to server", android.R.drawable.ic_dialog_alert);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +52,22 @@ public class StartUpActivity extends Activity implements ProtocolListener {
         avatarImage = application.AVATAR_DEFAULT_URI;
 
         if (BuildConfig.DEBUG) {
-            Intent main = new Intent(this, ChatActivity.class);
-            startActivity(main);
+            //     Intent main = new Intent(this, ChatActivity.class);
+            //    startActivity(main);
         }
     }
 
     public void join_joinButton_click(View v) {
         String nickName = nickEditText.getText().toString();
         if (nickIsValid(nickName)) {
-            server.registerRequest(nickName);
+            connect(nickName);
         } else {
-            showEmptyNickWarning();
+            showAlert("Invalid nickname", "Nick can not be empty", android.R.drawable.ic_dialog_info);
         }
+    }
+
+    private void connect(String nickName) {
+        new ConnectionTask(server, this).execute(nickName);
     }
 
     public void pickAvatar_avatarImageView_click(View v) {
@@ -102,17 +117,17 @@ public class StartUpActivity extends Activity implements ProtocolListener {
         }
     }
 
-    private void showEmptyNickWarning() {
+    public void showAlert(String title, String message, int iconID) {
         new AlertDialog.Builder(StartUpActivity.this)
-                .setTitle("Invalid nick")
-                .setMessage("Nick can not be empty")
+                .setTitle(title)
+                .setMessage(message)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // do nothing, just close this dialog
                     }
                 })
-                .setIcon(android.R.drawable.ic_dialog_info)
+                .setIcon(iconID)
                 .show()
                 .setCanceledOnTouchOutside(true);
     }
@@ -127,8 +142,41 @@ public class StartUpActivity extends Activity implements ProtocolListener {
 
     @Override
     public void userRegistered(int id, String nickName) {
+        handler.removeCallbacks(userRegistredRunnable);
         application.setUser(new User(nickName, id));
         Intent main = new Intent(this, MainActivity.class);
         startActivity(main);
+    }
+
+    public void startUserRegistredTimer() {
+        handler.postDelayed(userRegistredRunnable, 3000); // todo move delay time to config or somewhere...
+    }
+}
+
+class ConnectionTask extends AsyncTask<String, Void, Boolean> {
+    private Server server;
+    StartUpActivity activity;
+
+    ConnectionTask(Server server, StartUpActivity activity) {
+        this.server = server;
+        this.activity = activity;
+    }
+
+    protected Boolean doInBackground(String... nickNames) {
+        server.disconnect(); // todo
+        if (server.connect("192.168.1.3", 12345)) { // todo read connection parameters from settings
+            server.registerRequest(nickNames[0]);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    protected void onPostExecute(Boolean result) {
+        if (!result) {
+            activity.showAlert("Connection error", "Cannot connect to server", android.R.drawable.ic_dialog_alert);
+        } else {
+            activity.startUserRegistredTimer();
+        }
     }
 }

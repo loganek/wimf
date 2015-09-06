@@ -33,7 +33,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         assert app != null;
 
         server = app.getServer();
-        server.connect();
+        // todo check if connection is established
     }
 
     @Override
