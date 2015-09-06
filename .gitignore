@@ -42,6 +42,7 @@
 .DS_Store
 /src/android-client/local.properties
 /src/android-client/.idea/workspace.xml
+/src/android-client/.idea/inspectionProfiles
 /src/android-client/.idea/libraries
 /src/android-client/build
 /src/android-client/app/src/main/res/values/private_keys.xml
