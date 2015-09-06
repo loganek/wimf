@@ -35,6 +35,11 @@ public class StartUpActivity extends AppCompatActivity {
         assert application != null;
 
         avatarImage = application.AVATAR_DEFAULT_URI;
+
+        if (BuildConfig.DEBUG) {
+            Intent main = new Intent(this, ChatActivity.class);
+            startActivity(main);
+        }
     }
 
     public void join_joinButton_click(View v) {
