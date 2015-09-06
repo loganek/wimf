@@ -1,24 +1,25 @@
 package eu.cookandcommit.wimf;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-public class StartUpActivity extends AppCompatActivity {
+import com.google.android.gms.maps.model.LatLng;
+
+public class StartUpActivity extends Activity implements ProtocolListener {
     private EditText nickEditText;
     private ImageView avatarImageView;
     WimfApplication application;
     String avatarImage;
+    private Server server;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,9 @@ public class StartUpActivity extends AppCompatActivity {
         application = (WimfApplication) getApplication();
         assert application != null;
 
+        server = application.getServer();
+        server.addListener(this);
+
         avatarImage = application.AVATAR_DEFAULT_URI;
 
         if (BuildConfig.DEBUG) {
@@ -45,10 +49,7 @@ public class StartUpActivity extends AppCompatActivity {
     public void join_joinButton_click(View v) {
         String nickName = nickEditText.getText().toString();
         if (nickIsValid(nickName)) {
-            Intent main = new Intent(this, MainActivity.class);
-            main.putExtra(application.NICK_MSG_VAR, nickName);
-            main.putExtra(application.AVATAR_URI_MSG_VAR, avatarImage);
-            startActivity(main);
+            server.registerRequest(nickName);
         } else {
             showEmptyNickWarning();
         }
@@ -121,24 +122,13 @@ public class StartUpActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_start_up, menu);
-        return true;
+    public void userLocationChanged(User user, LatLng location) {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void userRegistered(int id, String nickName) {
+        application.setUser(new User(nickName, id));
+        Intent main = new Intent(this, MainActivity.class);
+        startActivity(main);
     }
 }

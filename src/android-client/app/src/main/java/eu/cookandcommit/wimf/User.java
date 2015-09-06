@@ -1,10 +1,19 @@
 package eu.cookandcommit.wimf;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 
 public class User {
     private int id;
+    private LatLng location;
     private ArrayList<Chat> chats;
+    private String nick;
+
+    public User(String nick, int id) {
+        this.nick = nick;
+        this.id = id;
+    }
 
     public Chat getChat(User friend) {
         for (Chat chat : chats) {
@@ -24,6 +33,18 @@ public class User {
         Chat chat = new Chat(friend);
         chats.add(chat);
         return chat;
+    }
+
+    public LatLng getLocation() {
+        return location;
+    }
+
+    public void updateLocation(LatLng location) {
+        this.location = location;
+    }
+
+    public String getNick() {
+        return nick;
     }
 
     @Override

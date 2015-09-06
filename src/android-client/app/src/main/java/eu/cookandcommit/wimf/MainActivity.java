@@ -8,9 +8,17 @@ import android.view.MenuItem;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MainActivity extends FragmentActivity
-implements OnMapReadyCallback {
+public class MainActivity extends FragmentActivity implements OnMapReadyCallback, ProtocolListener {
+
+    private GoogleMap map = null;
+    private Server server;
+
+    private boolean mapIsReady() {
+        return map != null;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +29,11 @@ implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        WimfApplication app = (WimfApplication) getApplication();
+        assert app != null;
+
+        server = app.getServer();
+        server.connect();
     }
 
     @Override
@@ -47,5 +60,23 @@ implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
+    }
+
+    @Override
+    public void userLocationChanged(User user, LatLng location) {
+        if (!mapIsReady()) {
+            return;
+        }
+
+        /* todo
+        map.addMarker(new MarkerOptions()
+                .position(location)
+                .title("Todo"));
+                */
+    }
+
+    @Override
+    public void userRegistered(int id, String nick) {
     }
 }
