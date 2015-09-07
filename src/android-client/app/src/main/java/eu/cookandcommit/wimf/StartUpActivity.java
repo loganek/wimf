@@ -50,11 +50,6 @@ public class StartUpActivity extends Activity implements ProtocolListener {
         server.addListener(this);
 
         avatarImage = application.AVATAR_DEFAULT_URI;
-
-        if (BuildConfig.DEBUG) {
-            //     Intent main = new Intent(this, ChatActivity.class);
-            //    startActivity(main);
-        }
     }
 
     public void join_joinButton_click(View v) {
