@@ -84,10 +84,12 @@ void Client::login_frame (const Login& frame)
 
 void Client::location_frame (const Location& frame)
 {
+	double prev_lat = user->get_latitude ();
+	double prev_lon = user->get_longitude ();
 	user->set_coords (frame.latitude (), frame.longitude ());
 
 	// todo send info to previous neighbors, that client disappeared from the region
-	parent->broadcast_new_location (user);
+	parent->broadcast_new_location (shared_from_this (), prev_lat, prev_lon);
 }
 
 void Client::user_info_frame (const eu::onionsoftware::wimf::UserInfo& frame)

@@ -126,6 +126,13 @@ int main (int argc, char **argv)
 			people[id] = std::make_shared<Wimf::User>(id, info.user_info().login().nickname());
 			if (update_coords) people[id]->set_coords(prev_lat, prev_lon);
 		}
+		else if (info.has_availability())
+		{
+			if (info.availability().status() != Availability_Status_IN_RANGE)
+			{
+				people.erase(info.availability().user_id());
+			}
+		}
 		else
 			std::cout << "unknown frame" << std::endl;
 	});

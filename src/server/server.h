@@ -26,7 +26,7 @@ public:
 
 	void remove_client (int sock_fd);
 
-	void broadcast_new_location (const std::shared_ptr<User>& modified_user);
+	void broadcast_new_location (const std::shared_ptr<Client>& client, double prev_latitude, double prev_longitude);
 };
 
 }

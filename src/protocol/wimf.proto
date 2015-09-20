@@ -23,10 +23,22 @@ message Location {
 	optional int32 user_id = 3;
 }
 
+message Availability {
+	enum Status {
+		IN_RANGE = 0;
+		OUT_OF_RANGE = 1;
+		DISCONNECTED = 2;
+	}
+
+	required int32 user_id = 1;
+	optional Status status = 2;
+}
+
 message WimfInfo
 {
 	optional Login login = 1;
 	optional Message message = 2;
 	optional Location location = 3;
 	optional UserInfo user_info = 4;
+	optional Availability availability = 5;
 }

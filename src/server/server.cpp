@@ -86,20 +86,42 @@ void Server::remove_client (int sock_fd)
 	Logger::log ("Server: client removed");
 }
 
-void Server::broadcast_new_location (const std::shared_ptr<User>& modified_user)
+void Server::broadcast_new_location (const std::shared_ptr<Client>& modified_client, double prev_latitude, double prev_longitude)
 {
-	WimfInfo frame;
-	auto location = frame.mutable_location ();
-	location->set_latitude (modified_user->get_latitude ());
-	location->set_longitude (modified_user->get_longitude ());
-	location->set_user_id (modified_user->get_id ());
+	auto modified_user = modified_client->get_user ();
+
+	auto build_location_frame = [] (const std::shared_ptr<User>& user) {
+		WimfInfo frame;
+		auto location = frame.mutable_location ();
+		location->set_latitude (user->get_latitude ());
+		location->set_longitude (user->get_longitude ());
+		location->set_user_id (user->get_id ());
+		return frame;
+	};
+
+	WimfInfo avinfo;
+	auto av = avinfo.mutable_availability ();
+	av->set_status (Availability_Status_OUT_OF_RANGE);
+
+	auto frame = build_location_frame (modified_user);
 
 	for (auto client : clients)
 	{
 		auto user = client.second->get_user ();
-		if (user && user->in_range (modified_user->get_latitude (), modified_user->get_longitude ()))
+		if (!user || user == modified_user)
+			continue;
+
+		if (user->in_range (modified_user->get_latitude (), modified_user->get_longitude ()))
 		{
 			client.second->send_frame (frame);
+			modified_client->send_frame (build_location_frame (user));
+		}
+		else if (User::coords_valid(prev_latitude, prev_longitude) && user->in_range (prev_latitude, prev_longitude))
+		{
+			av->set_user_id (modified_user->get_id ());
+			client.second->send_frame (avinfo);
+			av->set_user_id (user->get_id ());
+			modified_client->send_frame (avinfo);
 		}
 	}
 }
