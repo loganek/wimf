@@ -4,7 +4,6 @@
 
 #include <netinet/in.h>
 #include <thread>
-#include <algorithm>
 
 using namespace Wimf;
 using namespace eu::onionsoftware::wimf;
@@ -72,14 +71,10 @@ void Server::stop ()
 	}
 }
 
-std::shared_ptr<Client> Server::get_client (user_id user)
+std::shared_ptr<Client> Server::get_client (std::int32_t user)
 {
-	auto it = std::find_if (clients.begin (), clients.end () , [user] (const std::pair<int, std::shared_ptr<Client>>& c){
-		auto u = c.second->get_user ();
-		return (u && u->get_id() == user);
-	});
-
-	if (it != clients.end()) return it->second;
+	if (clients.find (user) != clients.end())
+		return clients[user];
 
 	Logger::log ("Server: Cannot find client of type: " + std::to_string (user));
 	return std::shared_ptr<Client>();
@@ -89,22 +84,6 @@ void Server::remove_client (int sock_fd)
 {
 	clients.erase (sock_fd);
 	Logger::log ("Server: client removed");
-}
-
-std::vector<std::shared_ptr<Client>> Server::get_clients_from_location (double latitude, double longitude)
-{
-	std::vector<std::shared_ptr<Client>> ok_clients;
-
-	for (auto client : clients)
-	{
-		auto user = client.second->get_user ();
-		if (user && user->in_range (latitude, longitude))
-		{
-			ok_clients.push_back (client.second);
-		}
-	}
-
-	return ok_clients;
 }
 
 void Server::broadcast_new_location (const std::shared_ptr<User>& modified_user)
