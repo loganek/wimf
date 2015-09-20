@@ -16,7 +16,7 @@ namespace Wimf {
 
 class Protocol
 {
-	typedef std::function<void(const WimfInfo&)> frame_callback;
+	typedef std::function<void(const eu::onionsoftware::wimf::WimfInfo&)> frame_callback;
 
 	// frame header (frame size: 4 bytes)
 	static constexpr int header_size = 4;
@@ -32,7 +32,7 @@ public:
 	virtual ~Protocol () {}
 
 	bool read_frame () const;
-	bool send_frame (const WimfInfo &frame) const;
+	bool send_frame (const eu::onionsoftware::wimf::WimfInfo &frame) const;
 };
 
 }

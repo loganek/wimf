@@ -5,6 +5,7 @@
 
 #include <unistd.h>
 
+using namespace eu::onionsoftware::wimf;
 using namespace Wimf;
 
 Client::Client (int client_fd, std::shared_ptr<Server> parent_server)

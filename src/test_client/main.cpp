@@ -13,6 +13,8 @@
 #include <thread>
 #include <iostream>
 
+using namespace eu::onionsoftware::wimf;
+
 void error(const char *msg)
 {
 	std::cerr << msg << std::endl;

@@ -1,3 +1,5 @@
+package eu.onionsoftware.wimf;
+
 message Message {
 	optional int32 from = 1;
 	required int32 to = 2;

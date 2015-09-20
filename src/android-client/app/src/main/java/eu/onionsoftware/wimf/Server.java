@@ -1,4 +1,4 @@
-package eu.cookandcommit.wimf;
+package eu.onionsoftware.wimf;
 
 import com.google.android.gms.maps.model.LatLng;
 

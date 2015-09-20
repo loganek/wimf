@@ -1,4 +1,4 @@
-package eu.cookandcommit.wimf;
+package eu.onionsoftware.wimf;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -77,5 +77,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void userRegistered(int id, String nick) {
+        Wimf.WimfInfo info = Wimf.WimfInfo.newBuilder().build();
     }
 }

@@ -1,4 +1,4 @@
-package eu.cookandcommit.wimf.wimf;
+package eu.onionsoftware.wimf.wimf;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

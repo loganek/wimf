@@ -11,6 +11,7 @@
 #include <sys/socket.h>
 
 using namespace Wimf;
+using namespace eu::onionsoftware::wimf;
 
 Protocol::Protocol (int sock_fd, frame_callback callback)
 : sock_fd (sock_fd),

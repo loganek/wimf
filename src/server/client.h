@@ -21,10 +21,10 @@ private:
 	std::shared_ptr<Server> parent;
 	Protocol protocol;
 
-	void message_frame (const Message& frame);
-	void login_frame (const Login& frame);
+	void message_frame (const eu::onionsoftware::wimf::Message& frame);
+	void login_frame (const eu::onionsoftware::wimf::Login& frame);
 
-	void on_new_frame (const WimfInfo& frame);
+	void on_new_frame (const eu::onionsoftware::wimf::WimfInfo& frame);
 
 	void close ();
 
