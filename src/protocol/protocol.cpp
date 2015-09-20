@@ -26,7 +26,7 @@ bool Protocol::read_requested_size (int requested_size, char* buffer) const
 
 	while (size < requested_size)
 	{
-		if ((cnt = recv (sock_fd, buffer + size, requested_size - size, 0)) < 0)
+		if ((cnt = recv (sock_fd, buffer + size, requested_size - size, 0)) < 1)
 		{
 			return false;
 		}
@@ -72,7 +72,7 @@ bool Protocol::read_frame () const
 		frame_size |= buff[i] << (i << 3);
 	}
 
-	if (frame_size < max_frame_size)
+	if (frame_size > max_frame_size)
 	{
 		Logger::log ("Protocol: frame_size is greater than max_frame_size");
 		return false;

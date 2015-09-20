@@ -23,6 +23,7 @@ void Client::start ()
 
 void Client::close ()
 {
+	Logger::log ("Client: disconnecting");
 	parent->remove_client (fd);
 	::close (fd);
 }
