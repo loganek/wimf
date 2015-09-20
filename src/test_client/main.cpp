@@ -6,18 +6,11 @@
  */
 
 #include "protocol/protocol.h"
-#include "protocol/data_frames/dataframes.h"
+#include "protocol/wimf.pb.h"
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <netdb.h>
 
 #include <thread>
-#include <cstdlib>
-#include <cstdio>
-#include <unistd.h>
-#include <cstring>
 #include <iostream>
 
 void error(const char *msg)
@@ -26,23 +19,15 @@ void error(const char *msg)
 	exit(1);
 }
 
-int send_hello (int sock_fd, Wimf::user_id id)
-{
-	Wimf::DataFrames::HelloFrame frame (id);
-	Wimf::DataBuffer buff = frame.serialize();
-	Wimf::Protocol::postserialize(buff);
-	return write (sock_fd, buff.get_data(), buff.get_pointer());
-}
-
 int main (int argc, char **argv)
 {
 	if (argc != 4)
 	{
-		std::cerr << "Usage: " << argv [0] << " <user id> <server ip> <port>" << std::endl;
+		error(("Usage: " + std::string(argv [0]) + " <nickname> <server ip> <port>").c_str());
 		return 1;
 	}
 
-	Wimf::user_id client_id = atoi (argv [1]);
+	std::string nickname = argv [1];
 	sockaddr_in serv_addr;
 
 	int sockfd = socket (AF_INET, SOCK_STREAM, 0);
@@ -69,41 +54,34 @@ int main (int argc, char **argv)
 		error ("ERROR connecting");
 	}
 
-	if (send_hello (sockfd, client_id) < 0)
-	{
-		error ("ERROR writing to socket HELLO message");
-	}
-
-	std::thread th([sockfd] {
-		Wimf::Protocol protocol ([](std::shared_ptr<Wimf::DataFrames::IDataFrame> frame){
-			std::cout << "Have message " << (int)frame->get_frame_type() << std::endl;
-			if (frame->get_frame_type() == Wimf::FrameType::MESSAGE) {
-				auto msg = std::static_pointer_cast<Wimf::DataFrames::MessageFrame>(frame);
-				std::cout << "Message from: " << msg->get_from() << ": " << msg->get_message() << std::endl;
-			}
-		});
-
-		char buffer [256];
-		int n = 0;
-		while ((n = read (sockfd, buffer, 255)) >= 0)
-		{
-			for (int i = 0; i < n; i++)
-				protocol.append_byte(buffer [i]);
-		}
+	Wimf::Protocol protocol (sockfd, [](const WimfInfo& info){
+		if (info.has_message())
+			std::cout << "Have message " << info.message().text() << std::endl;
+		else if (info.has_login())
+			std::cout << "Login confirmed: " << info.login().nickname() << " " << info.login().id() << std::endl;
+		else
+			std::cout << "unknown frame" << std::endl;
 	});
 
-	std::string msg = "witaj"; Wimf::user_id dest_id;
-	Wimf::DataBuffer buf;
+	std::thread th([protocol] {
+		while (protocol.read_frame());
+	});
+
+	WimfInfo info;
+	info.mutable_login()->set_nickname(nickname);
+	protocol.send_frame(info);
+	int dest_id;
 	do {
 		std::cin >> dest_id;
-		//std::getline (std::cin, msg);
-		Wimf::DataFrames::MessageFrame msg_frame (client_id, dest_id, msg);
-		buf = msg_frame.serialize();
-		Wimf::Protocol::postserialize(buf);
-		write (sockfd, buf.get_data(), buf.get_pointer());
+		WimfInfo frame;
+		auto msg = frame.mutable_message();
+		msg->set_to(dest_id);
+		msg->set_text("hello ;)");
+		protocol.send_frame(frame);
 	} while (dest_id != -1);
 
-	close (sockfd);
+	shutdown (sockfd, SHUT_RDWR);
+	th.join();
 
 	return 0;
 }

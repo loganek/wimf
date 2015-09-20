@@ -3,11 +3,10 @@
 
 #include "user.h"
 #include "protocol/protocol.h"
-#include "protocol/data_frames/dataframes.h"
+#include "protocol/wimf.pb.h"
 
 #include <string>
 #include <memory>
-#include <vector>
 
 namespace Wimf {
 
@@ -22,21 +21,20 @@ private:
 	std::shared_ptr<Server> parent;
 	Protocol protocol;
 
-	void message_frame (std::shared_ptr<DataFrames::MessageFrame> frame);
-	void hello_frame (std::shared_ptr<DataFrames::HelloFrame> frame);
-	void location_frame (std::shared_ptr<DataFrames::LocationFrame> frame);
+	void message_frame (const Message& frame);
+	void login_frame (const Login& frame);
 
-	void on_new_frame (std::shared_ptr<DataFrames::IDataFrame> frame);
+	void on_new_frame (const WimfInfo& frame);
 
-	void process_queries ();
 	void close ();
+
+	bool logged_in() const { return !!user; }
 
 public:
 	Client (int client_fd, std::shared_ptr<Server> parent_server);
 	virtual ~Client () {}
 
 	void start ();
-	void send_frame (std::shared_ptr<DataFrames::IDataFrame> frame) const;
 
 	std::shared_ptr<User> get_user () const { return user; }
 };

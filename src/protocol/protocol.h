@@ -8,34 +8,31 @@
 #ifndef PROTOCOL_H_
 #define PROTOCOL_H_
 
-#include "data_types.h"
-#include "data_frames/idataframe.h"
-#include "databuffer.h"
+#include "protocol/wimf.pb.h"
 
-#include <memory>
 #include <functional>
-#include <array>
 
 namespace Wimf {
 
 class Protocol
 {
-	typedef std::function<void(std::shared_ptr<DataFrames::IDataFrame> frame)> frame_callback;
+	typedef std::function<void(const WimfInfo&)> frame_callback;
 
-	DataBuffer buffer;
+	// frame header (frame size: 4 bytes)
+	static constexpr int header_size = 4;
+
+	int sock_fd;
 	frame_callback callback;
 
-	bool is_frame_over () const;
-	void parse_frame ();
-	FrameType preprocess_frame ();
+	bool read_requested_size (int requested_size, char* buffer) const;
+	bool write_requested_size (int requested_size, char* buffer) const;
 
 public:
-	Protocol (frame_callback callback);
+	Protocol (int sock_fd, frame_callback callback);
 	virtual ~Protocol () {}
 
-	void append_byte (const data_type& byte);
-
-	static void postserialize (DataBuffer& buffer);
+	bool read_frame () const;
+	bool send_frame (const WimfInfo &frame) const;
 };
 
 }

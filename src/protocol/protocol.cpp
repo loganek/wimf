@@ -7,123 +7,123 @@
 
 #include "protocol.h"
 #include "logger.h"
-#include "data_frames/dataframes.h"
 
-#include <cstdint>
+#include <sys/socket.h>
 
 using namespace Wimf;
 
-Protocol::Protocol (frame_callback callback)
-: callback (callback)
+Protocol::Protocol (int sock_fd, frame_callback callback)
+: sock_fd (sock_fd),
+  callback (callback)
 {
 }
 
-void Protocol::append_byte(const data_type& byte)
+bool Protocol::read_requested_size (int requested_size, char* buffer) const
 {
-	buffer.append (byte);
+	int size = 0;
+	int cnt = 0;
 
-	if (is_frame_over ())
+	while (size < requested_size)
 	{
-		parse_frame ();
-		buffer.reset ();
-	}
-
-	if (buffer.get_pointer () == buffer.get_size () / 2)
-	{
-		Logger::log ("protocol data overflow");
-		buffer.reset ();
-	}
-}
-
-bool Protocol::is_frame_over () const
-{
-	if (buffer.get_pointer () < 2 || buffer [buffer.get_pointer () - 1] != end_frame)
-		return false;
-
-	bool c = true;
-
-	for (auto it = buffer.rbegin () - 1; it != buffer.rend (); ++it)
-	{
-		if (*it != guard)
-			break;
-
-		c = !c;
-	}
-
-	return c;
-}
-
-void Protocol::parse_frame ()
-{
-	FrameType type = preprocess_frame ();
-	std::shared_ptr<DataFrames::IDataFrame> frame;
-
-	switch (type)
-	{
-	case FrameType::MESSAGE:
-		frame = DataFrames::MessageFrame::parse_frame (buffer);
-		break;
-	case FrameType::HELLO:
-		frame = DataFrames::HelloFrame::parse_frame (buffer);
-		break;
-	case FrameType::LOCATION:
-		frame = DataFrames::LocationFrame::parse_frame (buffer);
-		break;
-	}
-
-	if (frame)
-	{
-		Logger::log ("frame parsed");
-		callback (frame);
-	}
-}
-
-// todo has to be optimized...
-FrameType Protocol::preprocess_frame ()
-{
-	DataBuffer new_buffer;
-	bool prev_guard = false;
-
-	auto type = static_cast<FrameType> (buffer [0]);
-
-	for (size_type i = 1; i < buffer.get_pointer () - 1; ++i)
-	{
-		if (prev_guard)
+		if ((cnt = recv (sock_fd, buffer + size, requested_size - size, 0)) < 0)
 		{
-			if (buffer [i] == guard || buffer [i] == end_frame)
-			{
-				new_buffer.append (guard);
-				prev_guard = false;
-				continue;
-			}
-			else
-				throw std::runtime_error ("syntax error");
+			return false;
 		}
-		if (buffer [i] == guard)
-			prev_guard = true;
-		else
-			new_buffer.append (buffer [i]);
+		size += cnt;
 	}
 
-	if (prev_guard)
-		throw std::runtime_error ("syntax error");
-
-	buffer = new_buffer;
-
-	return type;
+	return true;
 }
 
-void Protocol::postserialize (DataBuffer& buffer)
+bool Protocol::write_requested_size (int requested_size, char* buffer) const
 {
-	DataBuffer new_buffer;
+	int size = 0;
+	int cnt = 0;
 
-	for (size_type i = 0; i < buffer.get_pointer (); i++)
+	while (size < requested_size)
 	{
-		if (buffer [i] == guard || buffer [i] == end_frame)
-			new_buffer.append (guard);
-		new_buffer.append (buffer [i]);
+		if ((cnt = send (sock_fd, buffer + size, requested_size - size, 0)) < 0)
+		{
+			return false;
+		}
+		size += cnt;
 	}
 
-	new_buffer.append (end_frame);
-	buffer = new_buffer;
+	return true;
+}
+
+bool Protocol::read_frame () const
+{
+	constexpr int static_buff_size = 256;
+	constexpr int max_frame_size = 4096;
+	char static_buff[static_buff_size] = {0};
+	char *buff = static_buff;
+
+	if (!read_requested_size (header_size, buff))
+	{
+		Logger::log ("Protocol: cannot read frame header");
+		return false;
+	}
+
+	int frame_size = 0;
+	for (int i = 0; i < header_size; i++)
+	{
+		frame_size |= buff[i] << (i << 3);
+	}
+
+	if (frame_size < max_frame_size)
+	{
+		Logger::log ("Protocol: frame_size is greater than max_frame_size");
+		return false;
+	}
+
+	if (static_buff_size < frame_size)
+		buff = new char[frame_size];
+
+	if (!read_requested_size (frame_size, buff))
+	{
+		Logger::log ("Protocol: cannot read frame");
+		return false;
+	}
+
+	WimfInfo info;
+	if (!info.ParseFromArray (buff, frame_size))
+	{
+		Logger::log ("Protocol: cannot deserialize frame");
+		return false;
+	}
+
+	Logger::log ("Protocol: frame has been received, processing...");
+
+	callback(info);
+
+	if (static_buff != buff)
+		delete buff;
+
+	return true;
+}
+
+bool Protocol::send_frame (const WimfInfo &frame) const
+{
+	int size = frame.ByteSize();
+	char header[4];
+
+	for (int i = 0; i < header_size; i++)
+	{
+		header[i] = size & 255;
+		size >>= 8;
+	}
+
+	if (!write_requested_size (header_size, header))
+	{
+		Logger::log ("Protocol: cannot send header");
+		return false;
+	}
+	if (!frame.SerializeToFileDescriptor (sock_fd))
+	{
+		Logger::log ("Protocol: cannot send frame");
+		return false;
+	}
+
+	return true;
 }

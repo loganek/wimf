@@ -1,48 +1,23 @@
 #include "client.h"
 #include "server.h"
 #include "protocol/logger.h"
-
-#include <sys/socket.h>
+#include "protocol/wimf.pb.h"
 
 #include <unistd.h>
-#include <cstdio>
 
 using namespace Wimf;
 
 Client::Client (int client_fd, std::shared_ptr<Server> parent_server)
 : fd (client_fd),
   parent (parent_server),
-  protocol (std::bind(&Client::on_new_frame, this, std::placeholders::_1))
+  protocol (client_fd, std::bind(&Client::on_new_frame, this, std::placeholders::_1))
 {
 }
 
 void Client::start ()
 { 
-	while (true)
-	{
-		char buff[256] = {0};
-		int n = recv (fd, buff, 255, 0);
-
-		if (n <= 0)
-			break;
-
-		for (int i = 0; i < n; ++i)
-			protocol.append_byte (buff [i]);
-	}
-
+	while (protocol.read_frame());
 	close ();
-}
-
-void Client::send_frame (std::shared_ptr<DataFrames::IDataFrame> frame) const
-{
-	DataBuffer buff = frame->serialize();
-
-	Protocol::postserialize (buff);
-	send (fd, buff.get_data(), buff.get_pointer(), 0);
-}
-
-void Client::process_queries ()
-{
 }
 
 void Client::close ()
@@ -51,40 +26,57 @@ void Client::close ()
 	::close (fd);
 }
 
-void Client::on_new_frame (std::shared_ptr<DataFrames::IDataFrame> frame)
+void Client::on_new_frame (const WimfInfo& frame)
 {
-	Wimf::Logger::log ("Have frame of type: " + std::to_string ((int) frame->get_frame_type ()));
-	switch (frame->get_frame_type ())
-	{
-	case FrameType::MESSAGE:
-		message_frame (std::static_pointer_cast<DataFrames::MessageFrame> (frame));
-		break;
-	case FrameType::HELLO:
-		hello_frame (std::static_pointer_cast<DataFrames::HelloFrame> (frame));
-	case FrameType::LOCATION:
-		location_frame (std::static_pointer_cast<DataFrames::LocationFrame> (frame));
-		break;
-	}
-}
+	Wimf::Logger::log ("Client: have a new frame");
 
-void Client::message_frame (std::shared_ptr<DataFrames::MessageFrame> frame)
-{
-	auto client = parent->get_client (frame->get_to ());
+	if (frame.has_login())
+		login_frame (frame.login());
 
-	if (!client)
+	if (!logged_in())
 	{
+		Wimf::Logger::log ("Client: cannot process frame. Client is not logged in");
 		return;
 	}
-	Wimf::Logger::log ("send message");
-	client->send_frame (frame);
+
+	if (frame.has_message())
+		message_frame (frame.message());
 }
 
-void Client::hello_frame (std::shared_ptr<DataFrames::HelloFrame> frame)
+void Client::message_frame (const Message& frame)
 {
-	user = std::make_shared<User> (frame->get_id ());
-	Wimf::Logger::log ("Have client id: " + std::to_string (frame->get_id()));
+	auto to_client = parent->get_client(frame.to());
+
+	if (!to_client)
+	{
+		Wimf::Logger::log ("Client: cannot pass message. 'To' client does not exist");
+		return;
+	}
+
+	WimfInfo wimf_frame;
+	auto msg = wimf_frame.mutable_message();
+	msg->CopyFrom(frame);
+	msg->set_from(user->get_id());
+
+	to_client->protocol.send_frame(wimf_frame);
 }
 
+void Client::login_frame (const Login& frame)
+{
+	if (!logged_in ())
+	{
+		user = std::make_shared<User> (fd, frame.nickname());
+
+		WimfInfo info;
+		Login *confirmation = info.mutable_login();
+		confirmation->set_id(fd);
+		confirmation->set_nickname(frame.nickname());
+
+		protocol.send_frame(info);
+	}
+}
+
+/*
 void Client::location_frame (std::shared_ptr<DataFrames::LocationFrame> frame)
 {
 	user->set_coords (frame->get_latitude (), frame->get_longitude ());
@@ -96,3 +88,4 @@ void Client::location_frame (std::shared_ptr<DataFrames::LocationFrame> frame)
 		client->send_frame (frame);
 	}
 }
+*/

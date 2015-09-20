@@ -3,24 +3,16 @@
 
 #include "client.h"
 
-#include <sys/socket.h>
-#include <netinet/in.h>
-
 #include <map>
-#include <atomic>
-#include <mutex>
 
 namespace Wimf {
 
 class Server : public std::enable_shared_from_this<Server>
 {
 private:
-	sockaddr_in serv_addr;
 	std::map<int, std::shared_ptr<Client>> clients;
 
-	std::mutex start_stop;
-	std::atomic_bool runserv;
-
+	int port;
 	int sock_fd;
 
 public:

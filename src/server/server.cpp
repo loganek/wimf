@@ -1,20 +1,17 @@
 #include "server.h"
+
 #include "protocol/logger.h"
 
-#include <cstring>
+#include <netinet/in.h>
 #include <thread>
-#include <stdexcept>
 #include <algorithm>
 
 using namespace Wimf;
 
 Server::Server (int port)
-: sock_fd (-1)
+: port (port),
+  sock_fd (-1)
 {
-	memset ((char*) &serv_addr, 0, sizeof (sockaddr_in));
-	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_addr.s_addr = INADDR_ANY;
-	serv_addr.sin_port = htons (port);
 }
 
 Server::~Server ()
@@ -23,11 +20,17 @@ Server::~Server ()
 }
 
 void Server::start ()
-{  
+{
 	sock_fd = socket (AF_INET, SOCK_STREAM, 0);
 
 	if (sock_fd < 0)
 		throw std::runtime_error ("cannot open socket");
+
+	sockaddr_in serv_addr;
+	memset ((char*) &serv_addr, 0, sizeof (sockaddr_in));
+	serv_addr.sin_family = AF_INET;
+	serv_addr.sin_addr.s_addr = INADDR_ANY;
+	serv_addr.sin_port = htons (port);
 
 	if (bind (sock_fd, (sockaddr*) &serv_addr, sizeof (serv_addr)) < 0)
 		throw std::runtime_error ("cannot bind");
@@ -38,30 +41,34 @@ void Server::start ()
 	sockaddr_in cli_addr;
 	memset ((char*) &cli_addr, 0, sizeof (sockaddr_in));
 
-	runserv = true;
+	int client_sock_fd;
 
-	while (runserv)
+	Logger::log ("Server: accepting clients");
+
+	while ((client_sock_fd = accept (sock_fd, (sockaddr*) &cli_addr, &sockaddr_len)) != -1)
 	{
-		std::lock_guard<std::mutex> lock (start_stop);
-		int client_sock_fd = accept (sock_fd, (sockaddr*) &cli_addr, &sockaddr_len);
-
-		if (client_sock_fd < 0)
+		auto c = clients.emplace (client_sock_fd, std::make_shared<Client> (client_sock_fd, shared_from_this ()));
+		if (!c.second)
 		{
-			Logger::log ("cannot accept socket");
+			Logger::log ("Server: cannot add new client");
 			continue;
 		}
+		std::thread(&Client::start, c.first->second).detach();
 
-		clients.emplace (client_sock_fd, std::make_shared<Client> (client_sock_fd, shared_from_this ()));
-		std::thread(&Client::start, clients.find (client_sock_fd)->second).detach();
-
-		Logger::log ("new client");
+		Logger::log ("Server: new client connected");
 	}
+
+	Logger::log ("disconnected");
 }
 
 void Server::stop ()
 {
-	runserv = false;
-	std::lock_guard<std::mutex> lock (start_stop);
+	if (sock_fd != -1)
+	{
+		Logger::log ("Server: disconnecting");
+		shutdown (sock_fd, SHUT_RDWR);
+		sock_fd = -1;
+	}
 }
 
 std::shared_ptr<Client> Server::get_client (user_id user)
@@ -73,14 +80,14 @@ std::shared_ptr<Client> Server::get_client (user_id user)
 
 	if (it != clients.end()) return it->second;
 
-	Logger::log ("Cannot find client of type: " + std::to_string (user));
+	Logger::log ("Server: Cannot find client of type: " + std::to_string (user));
 	return std::shared_ptr<Client>();
 }
 
 void Server::remove_client (int sock_fd)
 {
 	clients.erase (sock_fd);
-	Wimf::Logger::log ("client removed");
+	Logger::log ("Server: client removed");
 }
 
 std::vector<std::shared_ptr<Client>> Server::get_clients_from_location (double latitude, double longitude)
