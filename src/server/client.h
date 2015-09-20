@@ -23,6 +23,7 @@ private:
 
 	void message_frame (const eu::onionsoftware::wimf::Message& frame);
 	void login_frame (const eu::onionsoftware::wimf::Login& frame);
+	void location_frame (const eu::onionsoftware::wimf::Location& frame);
 
 	void on_new_frame (const eu::onionsoftware::wimf::WimfInfo& frame);
 
@@ -35,6 +36,8 @@ public:
 	virtual ~Client () {}
 
 	void start ();
+
+	void send_frame (const eu::onionsoftware::wimf::WimfInfo &frame) const;
 
 	std::shared_ptr<User> get_user () const { return user; }
 };

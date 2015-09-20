@@ -11,13 +11,13 @@ using namespace Wimf;
 Client::Client (int client_fd, std::shared_ptr<Server> parent_server)
 : fd (client_fd),
   parent (parent_server),
-  protocol (client_fd, std::bind(&Client::on_new_frame, this, std::placeholders::_1))
+  protocol (client_fd, std::bind (&Client::on_new_frame, this, std::placeholders::_1))
 {
 }
 
 void Client::start ()
 { 
-	while (protocol.read_frame());
+	while (protocol.read_frame ());
 	close ();
 }
 
@@ -32,22 +32,24 @@ void Client::on_new_frame (const WimfInfo& frame)
 {
 	Wimf::Logger::log ("Client: have a new frame");
 
-	if (frame.has_login())
-		login_frame (frame.login());
+	if (frame.has_login ())
+		login_frame (frame.login ());
 
-	if (!logged_in())
+	if (!logged_in ())
 	{
 		Wimf::Logger::log ("Client: cannot process frame. Client is not logged in");
 		return;
 	}
 
-	if (frame.has_message())
-		message_frame (frame.message());
+	if (frame.has_message ())
+		message_frame (frame.message ());
+	else if (frame.has_location ())
+		location_frame (frame.location ());
 }
 
 void Client::message_frame (const Message& frame)
 {
-	auto to_client = parent->get_client(frame.to());
+	auto to_client = parent->get_client (frame.to ());
 
 	if (!to_client)
 	{
@@ -56,11 +58,11 @@ void Client::message_frame (const Message& frame)
 	}
 
 	WimfInfo wimf_frame;
-	auto msg = wimf_frame.mutable_message();
-	msg->CopyFrom(frame);
-	msg->set_from(user->get_id());
+	auto msg = wimf_frame.mutable_message ();
+	msg->CopyFrom (frame);
+	msg->set_from (user->get_id ());
 
-	to_client->protocol.send_frame(wimf_frame);
+	to_client->send_frame(wimf_frame);
 }
 
 void Client::login_frame (const Login& frame)
@@ -78,16 +80,15 @@ void Client::login_frame (const Login& frame)
 	}
 }
 
-/*
-void Client::location_frame (std::shared_ptr<DataFrames::LocationFrame> frame)
+void Client::location_frame (const Location& frame)
 {
-	user->set_coords (frame->get_latitude (), frame->get_longitude ());
+	user->set_coords (frame.latitude (), frame.longitude ());
 
-	auto clients = parent->get_clients_from_location (frame->get_latitude (), frame->get_longitude ());
-
-	for (auto client : clients)
-	{
-		client->send_frame (frame);
-	}
+	// todo send info to previous neighbors, that client disappeared from the region
+	parent->broadcast_new_location (user);
 }
-*/
+
+void Client::send_frame (const WimfInfo &frame) const
+{
+	protocol.send_frame (frame);
+}

@@ -21,6 +21,30 @@ void error(const char *msg)
 	exit(1);
 }
 
+void message_command(const Wimf::Protocol& protocol)
+{
+	int dest_id;
+	std::cin >> dest_id;
+	WimfInfo frame;
+
+	auto msg = frame.mutable_message();
+	msg->set_to(dest_id);
+	msg->set_text("hello ;)");
+	protocol.send_frame(frame);
+}
+
+void location_command(const Wimf::Protocol& protocol)
+{
+	WimfInfo frame;
+	double lat, lon;
+	std::cin >> lat >> lon;
+
+	auto loc = frame.mutable_location();
+	loc->set_latitude(lat);
+	loc->set_longitude(lon);
+	protocol.send_frame(frame);
+}
+
 int main (int argc, char **argv)
 {
 	if (argc != 4)
@@ -61,6 +85,8 @@ int main (int argc, char **argv)
 			std::cout << "Have message " << info.message().text() << std::endl;
 		else if (info.has_login())
 			std::cout << "Login confirmed: " << info.login().nickname() << " " << info.login().id() << std::endl;
+		else if (info.has_location ())
+			std::cout << "New user location: " << info.location().user_id() << " " << info.location().latitude() << " " << info.location().longitude() << std::endl;
 		else
 			std::cout << "unknown frame" << std::endl;
 	});
@@ -72,15 +98,18 @@ int main (int argc, char **argv)
 	WimfInfo info;
 	info.mutable_login()->set_nickname(nickname);
 	protocol.send_frame(info);
-	int dest_id;
-	do {
-		std::cin >> dest_id;
-		WimfInfo frame;
-		auto msg = frame.mutable_message();
-		msg->set_to(dest_id);
-		msg->set_text("hello ;)");
-		protocol.send_frame(frame);
-	} while (dest_id != -1);
+	std::string command;
+
+	while (true)
+	{
+		std::cin >> command;
+		if (command == "exit")
+			break;
+		else if (command == "message")
+			message_command(protocol);
+		else if (command == "location")
+			location_command(protocol);
+	}
 
 	shutdown (sockfd, SHUT_RDWR);
 	th.join();

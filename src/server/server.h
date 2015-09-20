@@ -26,6 +26,8 @@ public:
 	std::vector<std::shared_ptr<Client>> get_clients_from_location (double latitude, double longitude);
 
 	void remove_client (int sock_fd);
+
+	void broadcast_new_location (const std::shared_ptr<User>& modified_user);
 };
 
 }

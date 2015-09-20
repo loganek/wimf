@@ -7,6 +7,7 @@
 #include <algorithm>
 
 using namespace Wimf;
+using namespace eu::onionsoftware::wimf;
 
 Server::Server (int port)
 : port (port),
@@ -104,4 +105,22 @@ std::vector<std::shared_ptr<Client>> Server::get_clients_from_location (double l
 	}
 
 	return ok_clients;
+}
+
+void Server::broadcast_new_location (const std::shared_ptr<User>& modified_user)
+{
+	WimfInfo frame;
+	auto location = frame.mutable_location ();
+	location->set_latitude (modified_user->get_latitude ());
+	location->set_longitude (modified_user->get_longitude ());
+	location->set_user_id (modified_user->get_id ());
+
+	for (auto client : clients)
+	{
+		auto user = client.second->get_user ();
+		if (user && user->in_range (modified_user->get_latitude (), modified_user->get_longitude ()))
+		{
+			client.second->send_frame (frame);
+		}
+	}
 }
