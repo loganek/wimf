@@ -20,6 +20,7 @@ public:
 	virtual ~User () {}
 
 	std::int32_t get_id () const { return id; }
+	std::string get_nickname () const { return nickname; }
 
 	void set_coords (double latitude, double longitude)
 	{

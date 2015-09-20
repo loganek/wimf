@@ -45,6 +45,8 @@ void Client::on_new_frame (const WimfInfo& frame)
 		message_frame (frame.message ());
 	else if (frame.has_location ())
 		location_frame (frame.location ());
+	else if (frame.has_user_info ())
+		user_info_frame (frame.user_info ());
 }
 
 void Client::message_frame (const Message& frame)
@@ -88,7 +90,24 @@ void Client::location_frame (const Location& frame)
 	parent->broadcast_new_location (user);
 }
 
+void Client::user_info_frame (const eu::onionsoftware::wimf::UserInfo& frame)
+{
+	auto client = parent->get_client (frame.id ());
+
+	if (!client || !client->get_user ())
+		return;
+
+	auto user = client->get_user ();
+	WimfInfo f;
+	f.mutable_user_info()->set_id (frame.id ());
+	auto login = f.mutable_user_info ()->mutable_login ();
+	login->set_nickname (user->get_nickname ());
+
+	send_frame (f);
+}
+
 void Client::send_frame (const WimfInfo &frame) const
 {
 	protocol.send_frame (frame);
 }
+

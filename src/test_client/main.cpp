@@ -7,6 +7,7 @@
 
 #include "protocol/protocol.h"
 #include "protocol/wimf.pb.h"
+#include "../server/user.h"
 
 #include <netdb.h>
 
@@ -20,6 +21,8 @@ void error(const char *msg)
 	std::cerr << msg << std::endl;
 	exit(1);
 }
+
+std::map<std::int32_t, std::shared_ptr<Wimf::User>> people;
 
 void message_command(const Wimf::Protocol& protocol)
 {
@@ -42,6 +45,21 @@ void location_command(const Wimf::Protocol& protocol)
 	auto loc = frame.mutable_location();
 	loc->set_latitude(lat);
 	loc->set_longitude(lon);
+	protocol.send_frame(frame);
+}
+
+void list_command()
+{
+	for (auto p : people)
+	{
+		std::cout << p.second->get_id() << " " << p.second->get_nickname() << " " << p.second->get_latitude() << " " << p.second->get_longitude() << std::endl;
+	}
+}
+
+void request_username(std::int32_t id, const Wimf::Protocol& protocol)
+{
+	WimfInfo frame;
+	frame.mutable_user_info()->set_id(id);
 	protocol.send_frame(frame);
 }
 
@@ -80,13 +98,34 @@ int main (int argc, char **argv)
 		error ("ERROR connecting");
 	}
 
-	Wimf::Protocol protocol (sockfd, [](const WimfInfo& info){
+	Wimf::Protocol protocol (sockfd, [&protocol](const WimfInfo& info){
 		if (info.has_message())
 			std::cout << "Have message " << info.message().text() << std::endl;
 		else if (info.has_login())
 			std::cout << "Login confirmed: " << info.login().nickname() << " " << info.login().id() << std::endl;
 		else if (info.has_location ())
+		{
 			std::cout << "New user location: " << info.location().user_id() << " " << info.location().latitude() << " " << info.location().longitude() << std::endl;
+			if (people.find (info.location().user_id()) == people.end())
+			{
+				people.emplace(info.location().user_id(), std::make_shared<Wimf::User>(info.location().user_id(), "unknown"));
+				request_username(info.location().user_id(), protocol);
+			}
+			people[info.location().user_id()]->set_coords(info.location().latitude(), info.location().longitude());
+		}
+		else if (info.has_user_info())
+		{
+			auto id = info.user_info().id();
+			double prev_lat, prev_lon; bool update_coords = false;
+			if (people.find(id) != people.end())
+			{
+				prev_lat = people[id]->get_latitude();
+				prev_lon = people[id]->get_longitude();
+				update_coords = true;
+			}
+			people[id] = std::make_shared<Wimf::User>(id, info.user_info().login().nickname());
+			if (update_coords) people[id]->set_coords(prev_lat, prev_lon);
+		}
 		else
 			std::cout << "unknown frame" << std::endl;
 	});
@@ -109,6 +148,8 @@ int main (int argc, char **argv)
 			message_command(protocol);
 		else if (command == "location")
 			location_command(protocol);
+		else if (command == "list")
+			list_command();
 	}
 
 	shutdown (sockfd, SHUT_RDWR);

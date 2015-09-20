@@ -12,6 +12,11 @@ message Login {
 	optional int32 id = 3;
 }
 
+message UserInfo {
+	required int32 id = 1;
+	optional Login login = 2;
+}
+
 message Location {
 	required double latitude = 1;
 	required double longitude = 2;
@@ -23,4 +28,5 @@ message WimfInfo
 	optional Login login = 1;
 	optional Message message = 2;
 	optional Location location = 3;
+	optional UserInfo user_info = 4;
 }
