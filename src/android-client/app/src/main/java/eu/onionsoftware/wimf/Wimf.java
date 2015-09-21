@@ -1299,22 +1299,18 @@ public final class Wimf {
     // @@protoc_insertion_point(class_scope:eu.onionsoftware.wimf.Login)
   }
 
-  public interface WimfInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:eu.onionsoftware.wimf.WimfInfo)
+  public interface UserInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:eu.onionsoftware.wimf.UserInfo)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
+     * <code>required int32 id = 1;</code>
      */
-    boolean hasMessage();
+    boolean hasId();
     /**
-     * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
+     * <code>required int32 id = 1;</code>
      */
-    eu.onionsoftware.wimf.Wimf.Message getMessage();
-    /**
-     * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
-     */
-    eu.onionsoftware.wimf.Wimf.MessageOrBuilder getMessageOrBuilder();
+    int getId();
 
     /**
      * <code>optional .eu.onionsoftware.wimf.Login login = 2;</code>
@@ -1330,25 +1326,25 @@ public final class Wimf {
     eu.onionsoftware.wimf.Wimf.LoginOrBuilder getLoginOrBuilder();
   }
   /**
-   * Protobuf type {@code eu.onionsoftware.wimf.WimfInfo}
+   * Protobuf type {@code eu.onionsoftware.wimf.UserInfo}
    */
-  public static final class WimfInfo extends
+  public static final class UserInfo extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:eu.onionsoftware.wimf.WimfInfo)
-      WimfInfoOrBuilder {
-    // Use WimfInfo.newBuilder() to construct.
-    private WimfInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:eu.onionsoftware.wimf.UserInfo)
+      UserInfoOrBuilder {
+    // Use UserInfo.newBuilder() to construct.
+    private UserInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private WimfInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private UserInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final WimfInfo defaultInstance;
-    public static WimfInfo getDefaultInstance() {
+    private static final UserInfo defaultInstance;
+    public static UserInfo getDefaultInstance() {
       return defaultInstance;
     }
 
-    public WimfInfo getDefaultInstanceForType() {
+    public UserInfo getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -1358,7 +1354,7 @@ public final class Wimf {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private WimfInfo(
+    private UserInfo(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1381,17 +1377,9 @@ public final class Wimf {
               }
               break;
             }
-            case 10: {
-              eu.onionsoftware.wimf.Wimf.Message.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = message_.toBuilder();
-              }
-              message_ = input.readMessage(eu.onionsoftware.wimf.Wimf.Message.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(message_);
-                message_ = subBuilder.buildPartial();
-              }
+            case 8: {
               bitField0_ |= 0x00000001;
+              id_ = input.readInt32();
               break;
             }
             case 18: {
@@ -1421,51 +1409,45 @@ public final class Wimf {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_WimfInfo_descriptor;
+      return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_UserInfo_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_WimfInfo_fieldAccessorTable
+      return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_UserInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              eu.onionsoftware.wimf.Wimf.WimfInfo.class, eu.onionsoftware.wimf.Wimf.WimfInfo.Builder.class);
+              eu.onionsoftware.wimf.Wimf.UserInfo.class, eu.onionsoftware.wimf.Wimf.UserInfo.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<WimfInfo> PARSER =
-        new com.google.protobuf.AbstractParser<WimfInfo>() {
-      public WimfInfo parsePartialFrom(
+    public static com.google.protobuf.Parser<UserInfo> PARSER =
+        new com.google.protobuf.AbstractParser<UserInfo>() {
+      public UserInfo parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new WimfInfo(input, extensionRegistry);
+        return new UserInfo(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<WimfInfo> getParserForType() {
+    public com.google.protobuf.Parser<UserInfo> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
-    public static final int MESSAGE_FIELD_NUMBER = 1;
-    private eu.onionsoftware.wimf.Wimf.Message message_;
+    public static final int ID_FIELD_NUMBER = 1;
+    private int id_;
     /**
-     * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
+     * <code>required int32 id = 1;</code>
      */
-    public boolean hasMessage() {
+    public boolean hasId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
+     * <code>required int32 id = 1;</code>
      */
-    public eu.onionsoftware.wimf.Wimf.Message getMessage() {
-      return message_;
-    }
-    /**
-     * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
-     */
-    public eu.onionsoftware.wimf.Wimf.MessageOrBuilder getMessageOrBuilder() {
-      return message_;
+    public int getId() {
+      return id_;
     }
 
     public static final int LOGIN_FIELD_NUMBER = 2;
@@ -1490,7 +1472,7 @@ public final class Wimf {
     }
 
     private void initFields() {
-      message_ = eu.onionsoftware.wimf.Wimf.Message.getDefaultInstance();
+      id_ = 0;
       login_ = eu.onionsoftware.wimf.Wimf.Login.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -1499,11 +1481,9 @@ public final class Wimf {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (hasMessage()) {
-        if (!getMessage().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
+      if (!hasId()) {
+        memoizedIsInitialized = 0;
+        return false;
       }
       if (hasLogin()) {
         if (!getLogin().isInitialized()) {
@@ -1519,7 +1499,7 @@ public final class Wimf {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, message_);
+        output.writeInt32(1, id_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(2, login_);
@@ -1535,7 +1515,7 @@ public final class Wimf {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, message_);
+          .computeInt32Size(1, id_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1553,53 +1533,53 @@ public final class Wimf {
       return super.writeReplace();
     }
 
-    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(
+    public static eu.onionsoftware.wimf.Wimf.UserInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(
+    public static eu.onionsoftware.wimf.Wimf.UserInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(byte[] data)
+    public static eu.onionsoftware.wimf.Wimf.UserInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(
+    public static eu.onionsoftware.wimf.Wimf.UserInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(java.io.InputStream input)
+    public static eu.onionsoftware.wimf.Wimf.UserInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(
+    public static eu.onionsoftware.wimf.Wimf.UserInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseDelimitedFrom(java.io.InputStream input)
+    public static eu.onionsoftware.wimf.Wimf.UserInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseDelimitedFrom(
+    public static eu.onionsoftware.wimf.Wimf.UserInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(
+    public static eu.onionsoftware.wimf.Wimf.UserInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(
+    public static eu.onionsoftware.wimf.Wimf.UserInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1608,7 +1588,7 @@ public final class Wimf {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(eu.onionsoftware.wimf.Wimf.WimfInfo prototype) {
+    public static Builder newBuilder(eu.onionsoftware.wimf.Wimf.UserInfo prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -1620,25 +1600,25 @@ public final class Wimf {
       return builder;
     }
     /**
-     * Protobuf type {@code eu.onionsoftware.wimf.WimfInfo}
+     * Protobuf type {@code eu.onionsoftware.wimf.UserInfo}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:eu.onionsoftware.wimf.WimfInfo)
-        eu.onionsoftware.wimf.Wimf.WimfInfoOrBuilder {
+        // @@protoc_insertion_point(builder_implements:eu.onionsoftware.wimf.UserInfo)
+        eu.onionsoftware.wimf.Wimf.UserInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_WimfInfo_descriptor;
+        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_UserInfo_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_WimfInfo_fieldAccessorTable
+        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_UserInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                eu.onionsoftware.wimf.Wimf.WimfInfo.class, eu.onionsoftware.wimf.Wimf.WimfInfo.Builder.class);
+                eu.onionsoftware.wimf.Wimf.UserInfo.class, eu.onionsoftware.wimf.Wimf.UserInfo.Builder.class);
       }
 
-      // Construct using eu.onionsoftware.wimf.Wimf.WimfInfo.newBuilder()
+      // Construct using eu.onionsoftware.wimf.Wimf.UserInfo.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1650,7 +1630,6 @@ public final class Wimf {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getMessageFieldBuilder();
           getLoginFieldBuilder();
         }
       }
@@ -1660,11 +1639,7 @@ public final class Wimf {
 
       public Builder clear() {
         super.clear();
-        if (messageBuilder_ == null) {
-          message_ = eu.onionsoftware.wimf.Wimf.Message.getDefaultInstance();
-        } else {
-          messageBuilder_.clear();
-        }
+        id_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         if (loginBuilder_ == null) {
           login_ = eu.onionsoftware.wimf.Wimf.Login.getDefaultInstance();
@@ -1681,33 +1656,29 @@ public final class Wimf {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_WimfInfo_descriptor;
+        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_UserInfo_descriptor;
       }
 
-      public eu.onionsoftware.wimf.Wimf.WimfInfo getDefaultInstanceForType() {
-        return eu.onionsoftware.wimf.Wimf.WimfInfo.getDefaultInstance();
+      public eu.onionsoftware.wimf.Wimf.UserInfo getDefaultInstanceForType() {
+        return eu.onionsoftware.wimf.Wimf.UserInfo.getDefaultInstance();
       }
 
-      public eu.onionsoftware.wimf.Wimf.WimfInfo build() {
-        eu.onionsoftware.wimf.Wimf.WimfInfo result = buildPartial();
+      public eu.onionsoftware.wimf.Wimf.UserInfo build() {
+        eu.onionsoftware.wimf.Wimf.UserInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public eu.onionsoftware.wimf.Wimf.WimfInfo buildPartial() {
-        eu.onionsoftware.wimf.Wimf.WimfInfo result = new eu.onionsoftware.wimf.Wimf.WimfInfo(this);
+      public eu.onionsoftware.wimf.Wimf.UserInfo buildPartial() {
+        eu.onionsoftware.wimf.Wimf.UserInfo result = new eu.onionsoftware.wimf.Wimf.UserInfo(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        if (messageBuilder_ == null) {
-          result.message_ = message_;
-        } else {
-          result.message_ = messageBuilder_.build();
-        }
+        result.id_ = id_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -1722,18 +1693,18 @@ public final class Wimf {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof eu.onionsoftware.wimf.Wimf.WimfInfo) {
-          return mergeFrom((eu.onionsoftware.wimf.Wimf.WimfInfo)other);
+        if (other instanceof eu.onionsoftware.wimf.Wimf.UserInfo) {
+          return mergeFrom((eu.onionsoftware.wimf.Wimf.UserInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(eu.onionsoftware.wimf.Wimf.WimfInfo other) {
-        if (other == eu.onionsoftware.wimf.Wimf.WimfInfo.getDefaultInstance()) return this;
-        if (other.hasMessage()) {
-          mergeMessage(other.getMessage());
+      public Builder mergeFrom(eu.onionsoftware.wimf.Wimf.UserInfo other) {
+        if (other == eu.onionsoftware.wimf.Wimf.UserInfo.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          setId(other.getId());
         }
         if (other.hasLogin()) {
           mergeLogin(other.getLogin());
@@ -1743,11 +1714,9 @@ public final class Wimf {
       }
 
       public final boolean isInitialized() {
-        if (hasMessage()) {
-          if (!getMessage().isInitialized()) {
-            
-            return false;
-          }
+        if (!hasId()) {
+          
+          return false;
         }
         if (hasLogin()) {
           if (!getLogin().isInitialized()) {
@@ -1762,11 +1731,11 @@ public final class Wimf {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        eu.onionsoftware.wimf.Wimf.WimfInfo parsedMessage = null;
+        eu.onionsoftware.wimf.Wimf.UserInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (eu.onionsoftware.wimf.Wimf.WimfInfo) e.getUnfinishedMessage();
+          parsedMessage = (eu.onionsoftware.wimf.Wimf.UserInfo) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -1777,120 +1746,36 @@ public final class Wimf {
       }
       private int bitField0_;
 
-      private eu.onionsoftware.wimf.Wimf.Message message_ = eu.onionsoftware.wimf.Wimf.Message.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          eu.onionsoftware.wimf.Wimf.Message, eu.onionsoftware.wimf.Wimf.Message.Builder, eu.onionsoftware.wimf.Wimf.MessageOrBuilder> messageBuilder_;
+      private int id_ ;
       /**
-       * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
+       * <code>required int32 id = 1;</code>
        */
-      public boolean hasMessage() {
+      public boolean hasId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
+       * <code>required int32 id = 1;</code>
        */
-      public eu.onionsoftware.wimf.Wimf.Message getMessage() {
-        if (messageBuilder_ == null) {
-          return message_;
-        } else {
-          return messageBuilder_.getMessage();
-        }
+      public int getId() {
+        return id_;
       }
       /**
-       * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
+       * <code>required int32 id = 1;</code>
        */
-      public Builder setMessage(eu.onionsoftware.wimf.Wimf.Message value) {
-        if (messageBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          message_ = value;
-          onChanged();
-        } else {
-          messageBuilder_.setMessage(value);
-        }
+      public Builder setId(int value) {
         bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
-       */
-      public Builder setMessage(
-          eu.onionsoftware.wimf.Wimf.Message.Builder builderForValue) {
-        if (messageBuilder_ == null) {
-          message_ = builderForValue.build();
-          onChanged();
-        } else {
-          messageBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
-       */
-      public Builder mergeMessage(eu.onionsoftware.wimf.Wimf.Message value) {
-        if (messageBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              message_ != eu.onionsoftware.wimf.Wimf.Message.getDefaultInstance()) {
-            message_ =
-              eu.onionsoftware.wimf.Wimf.Message.newBuilder(message_).mergeFrom(value).buildPartial();
-          } else {
-            message_ = value;
-          }
-          onChanged();
-        } else {
-          messageBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
-       */
-      public Builder clearMessage() {
-        if (messageBuilder_ == null) {
-          message_ = eu.onionsoftware.wimf.Wimf.Message.getDefaultInstance();
-          onChanged();
-        } else {
-          messageBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      /**
-       * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
-       */
-      public eu.onionsoftware.wimf.Wimf.Message.Builder getMessageBuilder() {
-        bitField0_ |= 0x00000001;
+        id_ = value;
         onChanged();
-        return getMessageFieldBuilder().getBuilder();
+        return this;
       }
       /**
-       * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
+       * <code>required int32 id = 1;</code>
        */
-      public eu.onionsoftware.wimf.Wimf.MessageOrBuilder getMessageOrBuilder() {
-        if (messageBuilder_ != null) {
-          return messageBuilder_.getMessageOrBuilder();
-        } else {
-          return message_;
-        }
-      }
-      /**
-       * <code>optional .eu.onionsoftware.wimf.Message message = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          eu.onionsoftware.wimf.Wimf.Message, eu.onionsoftware.wimf.Wimf.Message.Builder, eu.onionsoftware.wimf.Wimf.MessageOrBuilder> 
-          getMessageFieldBuilder() {
-        if (messageBuilder_ == null) {
-          messageBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              eu.onionsoftware.wimf.Wimf.Message, eu.onionsoftware.wimf.Wimf.Message.Builder, eu.onionsoftware.wimf.Wimf.MessageOrBuilder>(
-                  getMessage(),
-                  getParentForChildren(),
-                  isClean());
-          message_ = null;
-        }
-        return messageBuilder_;
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = 0;
+        onChanged();
+        return this;
       }
 
       private eu.onionsoftware.wimf.Wimf.Login login_ = eu.onionsoftware.wimf.Wimf.Login.getDefaultInstance();
@@ -2009,6 +1894,2482 @@ public final class Wimf {
         return loginBuilder_;
       }
 
+      // @@protoc_insertion_point(builder_scope:eu.onionsoftware.wimf.UserInfo)
+    }
+
+    static {
+      defaultInstance = new UserInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:eu.onionsoftware.wimf.UserInfo)
+  }
+
+  public interface LocationOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:eu.onionsoftware.wimf.Location)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required double latitude = 1;</code>
+     */
+    boolean hasLatitude();
+    /**
+     * <code>required double latitude = 1;</code>
+     */
+    double getLatitude();
+
+    /**
+     * <code>required double longitude = 2;</code>
+     */
+    boolean hasLongitude();
+    /**
+     * <code>required double longitude = 2;</code>
+     */
+    double getLongitude();
+
+    /**
+     * <code>optional int32 user_id = 3;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <code>optional int32 user_id = 3;</code>
+     */
+    int getUserId();
+  }
+  /**
+   * Protobuf type {@code eu.onionsoftware.wimf.Location}
+   */
+  public static final class Location extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:eu.onionsoftware.wimf.Location)
+      LocationOrBuilder {
+    // Use Location.newBuilder() to construct.
+    private Location(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Location(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Location defaultInstance;
+    public static Location getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Location getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Location(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 9: {
+              bitField0_ |= 0x00000001;
+              latitude_ = input.readDouble();
+              break;
+            }
+            case 17: {
+              bitField0_ |= 0x00000002;
+              longitude_ = input.readDouble();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              userId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_Location_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_Location_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              eu.onionsoftware.wimf.Wimf.Location.class, eu.onionsoftware.wimf.Wimf.Location.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Location> PARSER =
+        new com.google.protobuf.AbstractParser<Location>() {
+      public Location parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Location(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Location> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int LATITUDE_FIELD_NUMBER = 1;
+    private double latitude_;
+    /**
+     * <code>required double latitude = 1;</code>
+     */
+    public boolean hasLatitude() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required double latitude = 1;</code>
+     */
+    public double getLatitude() {
+      return latitude_;
+    }
+
+    public static final int LONGITUDE_FIELD_NUMBER = 2;
+    private double longitude_;
+    /**
+     * <code>required double longitude = 2;</code>
+     */
+    public boolean hasLongitude() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required double longitude = 2;</code>
+     */
+    public double getLongitude() {
+      return longitude_;
+    }
+
+    public static final int USER_ID_FIELD_NUMBER = 3;
+    private int userId_;
+    /**
+     * <code>optional int32 user_id = 3;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 user_id = 3;</code>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    private void initFields() {
+      latitude_ = 0D;
+      longitude_ = 0D;
+      userId_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasLatitude()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasLongitude()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeDouble(1, latitude_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeDouble(2, longitude_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, userId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(1, latitude_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, longitude_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, userId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static eu.onionsoftware.wimf.Wimf.Location parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Location parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Location parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Location parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Location parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Location parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Location parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Location parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Location parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Location parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(eu.onionsoftware.wimf.Wimf.Location prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code eu.onionsoftware.wimf.Location}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:eu.onionsoftware.wimf.Location)
+        eu.onionsoftware.wimf.Wimf.LocationOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_Location_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_Location_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                eu.onionsoftware.wimf.Wimf.Location.class, eu.onionsoftware.wimf.Wimf.Location.Builder.class);
+      }
+
+      // Construct using eu.onionsoftware.wimf.Wimf.Location.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        latitude_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        longitude_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_Location_descriptor;
+      }
+
+      public eu.onionsoftware.wimf.Wimf.Location getDefaultInstanceForType() {
+        return eu.onionsoftware.wimf.Wimf.Location.getDefaultInstance();
+      }
+
+      public eu.onionsoftware.wimf.Wimf.Location build() {
+        eu.onionsoftware.wimf.Wimf.Location result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public eu.onionsoftware.wimf.Wimf.Location buildPartial() {
+        eu.onionsoftware.wimf.Wimf.Location result = new eu.onionsoftware.wimf.Wimf.Location(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.latitude_ = latitude_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.longitude_ = longitude_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.userId_ = userId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof eu.onionsoftware.wimf.Wimf.Location) {
+          return mergeFrom((eu.onionsoftware.wimf.Wimf.Location)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(eu.onionsoftware.wimf.Wimf.Location other) {
+        if (other == eu.onionsoftware.wimf.Wimf.Location.getDefaultInstance()) return this;
+        if (other.hasLatitude()) {
+          setLatitude(other.getLatitude());
+        }
+        if (other.hasLongitude()) {
+          setLongitude(other.getLongitude());
+        }
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasLatitude()) {
+          
+          return false;
+        }
+        if (!hasLongitude()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        eu.onionsoftware.wimf.Wimf.Location parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (eu.onionsoftware.wimf.Wimf.Location) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private double latitude_ ;
+      /**
+       * <code>required double latitude = 1;</code>
+       */
+      public boolean hasLatitude() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required double latitude = 1;</code>
+       */
+      public double getLatitude() {
+        return latitude_;
+      }
+      /**
+       * <code>required double latitude = 1;</code>
+       */
+      public Builder setLatitude(double value) {
+        bitField0_ |= 0x00000001;
+        latitude_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required double latitude = 1;</code>
+       */
+      public Builder clearLatitude() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        latitude_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private double longitude_ ;
+      /**
+       * <code>required double longitude = 2;</code>
+       */
+      public boolean hasLongitude() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required double longitude = 2;</code>
+       */
+      public double getLongitude() {
+        return longitude_;
+      }
+      /**
+       * <code>required double longitude = 2;</code>
+       */
+      public Builder setLongitude(double value) {
+        bitField0_ |= 0x00000002;
+        longitude_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required double longitude = 2;</code>
+       */
+      public Builder clearLongitude() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        longitude_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private int userId_ ;
+      /**
+       * <code>optional int32 user_id = 3;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 user_id = 3;</code>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>optional int32 user_id = 3;</code>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000004;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 user_id = 3;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        userId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:eu.onionsoftware.wimf.Location)
+    }
+
+    static {
+      defaultInstance = new Location(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:eu.onionsoftware.wimf.Location)
+  }
+
+  public interface AvailabilityOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:eu.onionsoftware.wimf.Availability)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required int32 user_id = 1;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <code>required int32 user_id = 1;</code>
+     */
+    int getUserId();
+
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Availability.Status status = 2;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Availability.Status status = 2;</code>
+     */
+    eu.onionsoftware.wimf.Wimf.Availability.Status getStatus();
+  }
+  /**
+   * Protobuf type {@code eu.onionsoftware.wimf.Availability}
+   */
+  public static final class Availability extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:eu.onionsoftware.wimf.Availability)
+      AvailabilityOrBuilder {
+    // Use Availability.newBuilder() to construct.
+    private Availability(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Availability(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Availability defaultInstance;
+    public static Availability getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Availability getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Availability(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              eu.onionsoftware.wimf.Wimf.Availability.Status value = eu.onionsoftware.wimf.Wimf.Availability.Status.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_Availability_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_Availability_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              eu.onionsoftware.wimf.Wimf.Availability.class, eu.onionsoftware.wimf.Wimf.Availability.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Availability> PARSER =
+        new com.google.protobuf.AbstractParser<Availability>() {
+      public Availability parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Availability(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Availability> getParserForType() {
+      return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code eu.onionsoftware.wimf.Availability.Status}
+     */
+    public enum Status
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>IN_RANGE = 0;</code>
+       */
+      IN_RANGE(0, 0),
+      /**
+       * <code>OUT_OF_RANGE = 1;</code>
+       */
+      OUT_OF_RANGE(1, 1),
+      /**
+       * <code>DISCONNECTED = 2;</code>
+       */
+      DISCONNECTED(2, 2),
+      ;
+
+      /**
+       * <code>IN_RANGE = 0;</code>
+       */
+      public static final int IN_RANGE_VALUE = 0;
+      /**
+       * <code>OUT_OF_RANGE = 1;</code>
+       */
+      public static final int OUT_OF_RANGE_VALUE = 1;
+      /**
+       * <code>DISCONNECTED = 2;</code>
+       */
+      public static final int DISCONNECTED_VALUE = 2;
+
+
+      public final int getNumber() { return value; }
+
+      public static Status valueOf(int value) {
+        switch (value) {
+          case 0: return IN_RANGE;
+          case 1: return OUT_OF_RANGE;
+          case 2: return DISCONNECTED;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<Status>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Status>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Status>() {
+              public Status findValueByNumber(int number) {
+                return Status.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return eu.onionsoftware.wimf.Wimf.Availability.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final Status[] VALUES = values();
+
+      public static Status valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private Status(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:eu.onionsoftware.wimf.Availability.Status)
+    }
+
+    private int bitField0_;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private int userId_;
+    /**
+     * <code>required int32 user_id = 1;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 user_id = 1;</code>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    public static final int STATUS_FIELD_NUMBER = 2;
+    private eu.onionsoftware.wimf.Wimf.Availability.Status status_;
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Availability.Status status = 2;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Availability.Status status = 2;</code>
+     */
+    public eu.onionsoftware.wimf.Wimf.Availability.Status getStatus() {
+      return status_;
+    }
+
+    private void initFields() {
+      userId_ = 0;
+      status_ = eu.onionsoftware.wimf.Wimf.Availability.Status.IN_RANGE;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static eu.onionsoftware.wimf.Wimf.Availability parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Availability parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Availability parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Availability parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Availability parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Availability parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Availability parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Availability parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Availability parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static eu.onionsoftware.wimf.Wimf.Availability parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(eu.onionsoftware.wimf.Wimf.Availability prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code eu.onionsoftware.wimf.Availability}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:eu.onionsoftware.wimf.Availability)
+        eu.onionsoftware.wimf.Wimf.AvailabilityOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_Availability_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_Availability_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                eu.onionsoftware.wimf.Wimf.Availability.class, eu.onionsoftware.wimf.Wimf.Availability.Builder.class);
+      }
+
+      // Construct using eu.onionsoftware.wimf.Wimf.Availability.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = eu.onionsoftware.wimf.Wimf.Availability.Status.IN_RANGE;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_Availability_descriptor;
+      }
+
+      public eu.onionsoftware.wimf.Wimf.Availability getDefaultInstanceForType() {
+        return eu.onionsoftware.wimf.Wimf.Availability.getDefaultInstance();
+      }
+
+      public eu.onionsoftware.wimf.Wimf.Availability build() {
+        eu.onionsoftware.wimf.Wimf.Availability result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public eu.onionsoftware.wimf.Wimf.Availability buildPartial() {
+        eu.onionsoftware.wimf.Wimf.Availability result = new eu.onionsoftware.wimf.Wimf.Availability(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof eu.onionsoftware.wimf.Wimf.Availability) {
+          return mergeFrom((eu.onionsoftware.wimf.Wimf.Availability)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(eu.onionsoftware.wimf.Wimf.Availability other) {
+        if (other == eu.onionsoftware.wimf.Wimf.Availability.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        eu.onionsoftware.wimf.Wimf.Availability parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (eu.onionsoftware.wimf.Wimf.Availability) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int userId_ ;
+      /**
+       * <code>required int32 user_id = 1;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 user_id = 1;</code>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>required int32 user_id = 1;</code>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 user_id = 1;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private eu.onionsoftware.wimf.Wimf.Availability.Status status_ = eu.onionsoftware.wimf.Wimf.Availability.Status.IN_RANGE;
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Availability.Status status = 2;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Availability.Status status = 2;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.Availability.Status getStatus() {
+        return status_;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Availability.Status status = 2;</code>
+       */
+      public Builder setStatus(eu.onionsoftware.wimf.Wimf.Availability.Status value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Availability.Status status = 2;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = eu.onionsoftware.wimf.Wimf.Availability.Status.IN_RANGE;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:eu.onionsoftware.wimf.Availability)
+    }
+
+    static {
+      defaultInstance = new Availability(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:eu.onionsoftware.wimf.Availability)
+  }
+
+  public interface WimfInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:eu.onionsoftware.wimf.WimfInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+     */
+    boolean hasLogin();
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+     */
+    eu.onionsoftware.wimf.Wimf.Login getLogin();
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+     */
+    eu.onionsoftware.wimf.Wimf.LoginOrBuilder getLoginOrBuilder();
+
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+     */
+    boolean hasMessage();
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+     */
+    eu.onionsoftware.wimf.Wimf.Message getMessage();
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+     */
+    eu.onionsoftware.wimf.Wimf.MessageOrBuilder getMessageOrBuilder();
+
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+     */
+    boolean hasLocation();
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+     */
+    eu.onionsoftware.wimf.Wimf.Location getLocation();
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+     */
+    eu.onionsoftware.wimf.Wimf.LocationOrBuilder getLocationOrBuilder();
+
+    /**
+     * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+     */
+    boolean hasUserInfo();
+    /**
+     * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+     */
+    eu.onionsoftware.wimf.Wimf.UserInfo getUserInfo();
+    /**
+     * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+     */
+    eu.onionsoftware.wimf.Wimf.UserInfoOrBuilder getUserInfoOrBuilder();
+
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+     */
+    boolean hasAvailability();
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+     */
+    eu.onionsoftware.wimf.Wimf.Availability getAvailability();
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+     */
+    eu.onionsoftware.wimf.Wimf.AvailabilityOrBuilder getAvailabilityOrBuilder();
+  }
+  /**
+   * Protobuf type {@code eu.onionsoftware.wimf.WimfInfo}
+   */
+  public static final class WimfInfo extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:eu.onionsoftware.wimf.WimfInfo)
+      WimfInfoOrBuilder {
+    // Use WimfInfo.newBuilder() to construct.
+    private WimfInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private WimfInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final WimfInfo defaultInstance;
+    public static WimfInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public WimfInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private WimfInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              eu.onionsoftware.wimf.Wimf.Login.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = login_.toBuilder();
+              }
+              login_ = input.readMessage(eu.onionsoftware.wimf.Wimf.Login.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(login_);
+                login_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              eu.onionsoftware.wimf.Wimf.Message.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = message_.toBuilder();
+              }
+              message_ = input.readMessage(eu.onionsoftware.wimf.Wimf.Message.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(message_);
+                message_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 26: {
+              eu.onionsoftware.wimf.Wimf.Location.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = location_.toBuilder();
+              }
+              location_ = input.readMessage(eu.onionsoftware.wimf.Wimf.Location.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(location_);
+                location_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
+            case 34: {
+              eu.onionsoftware.wimf.Wimf.UserInfo.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = userInfo_.toBuilder();
+              }
+              userInfo_ = input.readMessage(eu.onionsoftware.wimf.Wimf.UserInfo.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(userInfo_);
+                userInfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000008;
+              break;
+            }
+            case 42: {
+              eu.onionsoftware.wimf.Wimf.Availability.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                subBuilder = availability_.toBuilder();
+              }
+              availability_ = input.readMessage(eu.onionsoftware.wimf.Wimf.Availability.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(availability_);
+                availability_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000010;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_WimfInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_WimfInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              eu.onionsoftware.wimf.Wimf.WimfInfo.class, eu.onionsoftware.wimf.Wimf.WimfInfo.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<WimfInfo> PARSER =
+        new com.google.protobuf.AbstractParser<WimfInfo>() {
+      public WimfInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new WimfInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<WimfInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int LOGIN_FIELD_NUMBER = 1;
+    private eu.onionsoftware.wimf.Wimf.Login login_;
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+     */
+    public boolean hasLogin() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+     */
+    public eu.onionsoftware.wimf.Wimf.Login getLogin() {
+      return login_;
+    }
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+     */
+    public eu.onionsoftware.wimf.Wimf.LoginOrBuilder getLoginOrBuilder() {
+      return login_;
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 2;
+    private eu.onionsoftware.wimf.Wimf.Message message_;
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+     */
+    public boolean hasMessage() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+     */
+    public eu.onionsoftware.wimf.Wimf.Message getMessage() {
+      return message_;
+    }
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+     */
+    public eu.onionsoftware.wimf.Wimf.MessageOrBuilder getMessageOrBuilder() {
+      return message_;
+    }
+
+    public static final int LOCATION_FIELD_NUMBER = 3;
+    private eu.onionsoftware.wimf.Wimf.Location location_;
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+     */
+    public boolean hasLocation() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+     */
+    public eu.onionsoftware.wimf.Wimf.Location getLocation() {
+      return location_;
+    }
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+     */
+    public eu.onionsoftware.wimf.Wimf.LocationOrBuilder getLocationOrBuilder() {
+      return location_;
+    }
+
+    public static final int USER_INFO_FIELD_NUMBER = 4;
+    private eu.onionsoftware.wimf.Wimf.UserInfo userInfo_;
+    /**
+     * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+     */
+    public boolean hasUserInfo() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+     */
+    public eu.onionsoftware.wimf.Wimf.UserInfo getUserInfo() {
+      return userInfo_;
+    }
+    /**
+     * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+     */
+    public eu.onionsoftware.wimf.Wimf.UserInfoOrBuilder getUserInfoOrBuilder() {
+      return userInfo_;
+    }
+
+    public static final int AVAILABILITY_FIELD_NUMBER = 5;
+    private eu.onionsoftware.wimf.Wimf.Availability availability_;
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+     */
+    public boolean hasAvailability() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+     */
+    public eu.onionsoftware.wimf.Wimf.Availability getAvailability() {
+      return availability_;
+    }
+    /**
+     * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+     */
+    public eu.onionsoftware.wimf.Wimf.AvailabilityOrBuilder getAvailabilityOrBuilder() {
+      return availability_;
+    }
+
+    private void initFields() {
+      login_ = eu.onionsoftware.wimf.Wimf.Login.getDefaultInstance();
+      message_ = eu.onionsoftware.wimf.Wimf.Message.getDefaultInstance();
+      location_ = eu.onionsoftware.wimf.Wimf.Location.getDefaultInstance();
+      userInfo_ = eu.onionsoftware.wimf.Wimf.UserInfo.getDefaultInstance();
+      availability_ = eu.onionsoftware.wimf.Wimf.Availability.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (hasLogin()) {
+        if (!getLogin().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasMessage()) {
+        if (!getMessage().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasLocation()) {
+        if (!getLocation().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasUserInfo()) {
+        if (!getUserInfo().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasAvailability()) {
+        if (!getAvailability().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, login_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, message_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(3, location_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeMessage(4, userInfo_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(5, availability_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, login_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, message_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, location_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, userInfo_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, availability_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static eu.onionsoftware.wimf.Wimf.WimfInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(eu.onionsoftware.wimf.Wimf.WimfInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code eu.onionsoftware.wimf.WimfInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:eu.onionsoftware.wimf.WimfInfo)
+        eu.onionsoftware.wimf.Wimf.WimfInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_WimfInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_WimfInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                eu.onionsoftware.wimf.Wimf.WimfInfo.class, eu.onionsoftware.wimf.Wimf.WimfInfo.Builder.class);
+      }
+
+      // Construct using eu.onionsoftware.wimf.Wimf.WimfInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getLoginFieldBuilder();
+          getMessageFieldBuilder();
+          getLocationFieldBuilder();
+          getUserInfoFieldBuilder();
+          getAvailabilityFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (loginBuilder_ == null) {
+          login_ = eu.onionsoftware.wimf.Wimf.Login.getDefaultInstance();
+        } else {
+          loginBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (messageBuilder_ == null) {
+          message_ = eu.onionsoftware.wimf.Wimf.Message.getDefaultInstance();
+        } else {
+          messageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (locationBuilder_ == null) {
+          location_ = eu.onionsoftware.wimf.Wimf.Location.getDefaultInstance();
+        } else {
+          locationBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        if (userInfoBuilder_ == null) {
+          userInfo_ = eu.onionsoftware.wimf.Wimf.UserInfo.getDefaultInstance();
+        } else {
+          userInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        if (availabilityBuilder_ == null) {
+          availability_ = eu.onionsoftware.wimf.Wimf.Availability.getDefaultInstance();
+        } else {
+          availabilityBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return eu.onionsoftware.wimf.Wimf.internal_static_eu_onionsoftware_wimf_WimfInfo_descriptor;
+      }
+
+      public eu.onionsoftware.wimf.Wimf.WimfInfo getDefaultInstanceForType() {
+        return eu.onionsoftware.wimf.Wimf.WimfInfo.getDefaultInstance();
+      }
+
+      public eu.onionsoftware.wimf.Wimf.WimfInfo build() {
+        eu.onionsoftware.wimf.Wimf.WimfInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public eu.onionsoftware.wimf.Wimf.WimfInfo buildPartial() {
+        eu.onionsoftware.wimf.Wimf.WimfInfo result = new eu.onionsoftware.wimf.Wimf.WimfInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (loginBuilder_ == null) {
+          result.login_ = login_;
+        } else {
+          result.login_ = loginBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (messageBuilder_ == null) {
+          result.message_ = message_;
+        } else {
+          result.message_ = messageBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (locationBuilder_ == null) {
+          result.location_ = location_;
+        } else {
+          result.location_ = locationBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        if (userInfoBuilder_ == null) {
+          result.userInfo_ = userInfo_;
+        } else {
+          result.userInfo_ = userInfoBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        if (availabilityBuilder_ == null) {
+          result.availability_ = availability_;
+        } else {
+          result.availability_ = availabilityBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof eu.onionsoftware.wimf.Wimf.WimfInfo) {
+          return mergeFrom((eu.onionsoftware.wimf.Wimf.WimfInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(eu.onionsoftware.wimf.Wimf.WimfInfo other) {
+        if (other == eu.onionsoftware.wimf.Wimf.WimfInfo.getDefaultInstance()) return this;
+        if (other.hasLogin()) {
+          mergeLogin(other.getLogin());
+        }
+        if (other.hasMessage()) {
+          mergeMessage(other.getMessage());
+        }
+        if (other.hasLocation()) {
+          mergeLocation(other.getLocation());
+        }
+        if (other.hasUserInfo()) {
+          mergeUserInfo(other.getUserInfo());
+        }
+        if (other.hasAvailability()) {
+          mergeAvailability(other.getAvailability());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (hasLogin()) {
+          if (!getLogin().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasMessage()) {
+          if (!getMessage().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasLocation()) {
+          if (!getLocation().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasUserInfo()) {
+          if (!getUserInfo().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasAvailability()) {
+          if (!getAvailability().isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        eu.onionsoftware.wimf.Wimf.WimfInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (eu.onionsoftware.wimf.Wimf.WimfInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private eu.onionsoftware.wimf.Wimf.Login login_ = eu.onionsoftware.wimf.Wimf.Login.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          eu.onionsoftware.wimf.Wimf.Login, eu.onionsoftware.wimf.Wimf.Login.Builder, eu.onionsoftware.wimf.Wimf.LoginOrBuilder> loginBuilder_;
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+       */
+      public boolean hasLogin() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.Login getLogin() {
+        if (loginBuilder_ == null) {
+          return login_;
+        } else {
+          return loginBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+       */
+      public Builder setLogin(eu.onionsoftware.wimf.Wimf.Login value) {
+        if (loginBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          login_ = value;
+          onChanged();
+        } else {
+          loginBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+       */
+      public Builder setLogin(
+          eu.onionsoftware.wimf.Wimf.Login.Builder builderForValue) {
+        if (loginBuilder_ == null) {
+          login_ = builderForValue.build();
+          onChanged();
+        } else {
+          loginBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+       */
+      public Builder mergeLogin(eu.onionsoftware.wimf.Wimf.Login value) {
+        if (loginBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              login_ != eu.onionsoftware.wimf.Wimf.Login.getDefaultInstance()) {
+            login_ =
+              eu.onionsoftware.wimf.Wimf.Login.newBuilder(login_).mergeFrom(value).buildPartial();
+          } else {
+            login_ = value;
+          }
+          onChanged();
+        } else {
+          loginBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+       */
+      public Builder clearLogin() {
+        if (loginBuilder_ == null) {
+          login_ = eu.onionsoftware.wimf.Wimf.Login.getDefaultInstance();
+          onChanged();
+        } else {
+          loginBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.Login.Builder getLoginBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getLoginFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.LoginOrBuilder getLoginOrBuilder() {
+        if (loginBuilder_ != null) {
+          return loginBuilder_.getMessageOrBuilder();
+        } else {
+          return login_;
+        }
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Login login = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          eu.onionsoftware.wimf.Wimf.Login, eu.onionsoftware.wimf.Wimf.Login.Builder, eu.onionsoftware.wimf.Wimf.LoginOrBuilder> 
+          getLoginFieldBuilder() {
+        if (loginBuilder_ == null) {
+          loginBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              eu.onionsoftware.wimf.Wimf.Login, eu.onionsoftware.wimf.Wimf.Login.Builder, eu.onionsoftware.wimf.Wimf.LoginOrBuilder>(
+                  getLogin(),
+                  getParentForChildren(),
+                  isClean());
+          login_ = null;
+        }
+        return loginBuilder_;
+      }
+
+      private eu.onionsoftware.wimf.Wimf.Message message_ = eu.onionsoftware.wimf.Wimf.Message.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          eu.onionsoftware.wimf.Wimf.Message, eu.onionsoftware.wimf.Wimf.Message.Builder, eu.onionsoftware.wimf.Wimf.MessageOrBuilder> messageBuilder_;
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+       */
+      public boolean hasMessage() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.Message getMessage() {
+        if (messageBuilder_ == null) {
+          return message_;
+        } else {
+          return messageBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+       */
+      public Builder setMessage(eu.onionsoftware.wimf.Wimf.Message value) {
+        if (messageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          message_ = value;
+          onChanged();
+        } else {
+          messageBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+       */
+      public Builder setMessage(
+          eu.onionsoftware.wimf.Wimf.Message.Builder builderForValue) {
+        if (messageBuilder_ == null) {
+          message_ = builderForValue.build();
+          onChanged();
+        } else {
+          messageBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+       */
+      public Builder mergeMessage(eu.onionsoftware.wimf.Wimf.Message value) {
+        if (messageBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              message_ != eu.onionsoftware.wimf.Wimf.Message.getDefaultInstance()) {
+            message_ =
+              eu.onionsoftware.wimf.Wimf.Message.newBuilder(message_).mergeFrom(value).buildPartial();
+          } else {
+            message_ = value;
+          }
+          onChanged();
+        } else {
+          messageBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+       */
+      public Builder clearMessage() {
+        if (messageBuilder_ == null) {
+          message_ = eu.onionsoftware.wimf.Wimf.Message.getDefaultInstance();
+          onChanged();
+        } else {
+          messageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.Message.Builder getMessageBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getMessageFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.MessageOrBuilder getMessageOrBuilder() {
+        if (messageBuilder_ != null) {
+          return messageBuilder_.getMessageOrBuilder();
+        } else {
+          return message_;
+        }
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Message message = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          eu.onionsoftware.wimf.Wimf.Message, eu.onionsoftware.wimf.Wimf.Message.Builder, eu.onionsoftware.wimf.Wimf.MessageOrBuilder> 
+          getMessageFieldBuilder() {
+        if (messageBuilder_ == null) {
+          messageBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              eu.onionsoftware.wimf.Wimf.Message, eu.onionsoftware.wimf.Wimf.Message.Builder, eu.onionsoftware.wimf.Wimf.MessageOrBuilder>(
+                  getMessage(),
+                  getParentForChildren(),
+                  isClean());
+          message_ = null;
+        }
+        return messageBuilder_;
+      }
+
+      private eu.onionsoftware.wimf.Wimf.Location location_ = eu.onionsoftware.wimf.Wimf.Location.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          eu.onionsoftware.wimf.Wimf.Location, eu.onionsoftware.wimf.Wimf.Location.Builder, eu.onionsoftware.wimf.Wimf.LocationOrBuilder> locationBuilder_;
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+       */
+      public boolean hasLocation() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.Location getLocation() {
+        if (locationBuilder_ == null) {
+          return location_;
+        } else {
+          return locationBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+       */
+      public Builder setLocation(eu.onionsoftware.wimf.Wimf.Location value) {
+        if (locationBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          location_ = value;
+          onChanged();
+        } else {
+          locationBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+       */
+      public Builder setLocation(
+          eu.onionsoftware.wimf.Wimf.Location.Builder builderForValue) {
+        if (locationBuilder_ == null) {
+          location_ = builderForValue.build();
+          onChanged();
+        } else {
+          locationBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+       */
+      public Builder mergeLocation(eu.onionsoftware.wimf.Wimf.Location value) {
+        if (locationBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              location_ != eu.onionsoftware.wimf.Wimf.Location.getDefaultInstance()) {
+            location_ =
+              eu.onionsoftware.wimf.Wimf.Location.newBuilder(location_).mergeFrom(value).buildPartial();
+          } else {
+            location_ = value;
+          }
+          onChanged();
+        } else {
+          locationBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+       */
+      public Builder clearLocation() {
+        if (locationBuilder_ == null) {
+          location_ = eu.onionsoftware.wimf.Wimf.Location.getDefaultInstance();
+          onChanged();
+        } else {
+          locationBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.Location.Builder getLocationBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getLocationFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.LocationOrBuilder getLocationOrBuilder() {
+        if (locationBuilder_ != null) {
+          return locationBuilder_.getMessageOrBuilder();
+        } else {
+          return location_;
+        }
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Location location = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          eu.onionsoftware.wimf.Wimf.Location, eu.onionsoftware.wimf.Wimf.Location.Builder, eu.onionsoftware.wimf.Wimf.LocationOrBuilder> 
+          getLocationFieldBuilder() {
+        if (locationBuilder_ == null) {
+          locationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              eu.onionsoftware.wimf.Wimf.Location, eu.onionsoftware.wimf.Wimf.Location.Builder, eu.onionsoftware.wimf.Wimf.LocationOrBuilder>(
+                  getLocation(),
+                  getParentForChildren(),
+                  isClean());
+          location_ = null;
+        }
+        return locationBuilder_;
+      }
+
+      private eu.onionsoftware.wimf.Wimf.UserInfo userInfo_ = eu.onionsoftware.wimf.Wimf.UserInfo.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          eu.onionsoftware.wimf.Wimf.UserInfo, eu.onionsoftware.wimf.Wimf.UserInfo.Builder, eu.onionsoftware.wimf.Wimf.UserInfoOrBuilder> userInfoBuilder_;
+      /**
+       * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+       */
+      public boolean hasUserInfo() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.UserInfo getUserInfo() {
+        if (userInfoBuilder_ == null) {
+          return userInfo_;
+        } else {
+          return userInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+       */
+      public Builder setUserInfo(eu.onionsoftware.wimf.Wimf.UserInfo value) {
+        if (userInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          userInfo_ = value;
+          onChanged();
+        } else {
+          userInfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+       */
+      public Builder setUserInfo(
+          eu.onionsoftware.wimf.Wimf.UserInfo.Builder builderForValue) {
+        if (userInfoBuilder_ == null) {
+          userInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          userInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+       */
+      public Builder mergeUserInfo(eu.onionsoftware.wimf.Wimf.UserInfo value) {
+        if (userInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              userInfo_ != eu.onionsoftware.wimf.Wimf.UserInfo.getDefaultInstance()) {
+            userInfo_ =
+              eu.onionsoftware.wimf.Wimf.UserInfo.newBuilder(userInfo_).mergeFrom(value).buildPartial();
+          } else {
+            userInfo_ = value;
+          }
+          onChanged();
+        } else {
+          userInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+       */
+      public Builder clearUserInfo() {
+        if (userInfoBuilder_ == null) {
+          userInfo_ = eu.onionsoftware.wimf.Wimf.UserInfo.getDefaultInstance();
+          onChanged();
+        } else {
+          userInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.UserInfo.Builder getUserInfoBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getUserInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.UserInfoOrBuilder getUserInfoOrBuilder() {
+        if (userInfoBuilder_ != null) {
+          return userInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return userInfo_;
+        }
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.UserInfo user_info = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          eu.onionsoftware.wimf.Wimf.UserInfo, eu.onionsoftware.wimf.Wimf.UserInfo.Builder, eu.onionsoftware.wimf.Wimf.UserInfoOrBuilder> 
+          getUserInfoFieldBuilder() {
+        if (userInfoBuilder_ == null) {
+          userInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              eu.onionsoftware.wimf.Wimf.UserInfo, eu.onionsoftware.wimf.Wimf.UserInfo.Builder, eu.onionsoftware.wimf.Wimf.UserInfoOrBuilder>(
+                  getUserInfo(),
+                  getParentForChildren(),
+                  isClean());
+          userInfo_ = null;
+        }
+        return userInfoBuilder_;
+      }
+
+      private eu.onionsoftware.wimf.Wimf.Availability availability_ = eu.onionsoftware.wimf.Wimf.Availability.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          eu.onionsoftware.wimf.Wimf.Availability, eu.onionsoftware.wimf.Wimf.Availability.Builder, eu.onionsoftware.wimf.Wimf.AvailabilityOrBuilder> availabilityBuilder_;
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+       */
+      public boolean hasAvailability() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.Availability getAvailability() {
+        if (availabilityBuilder_ == null) {
+          return availability_;
+        } else {
+          return availabilityBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+       */
+      public Builder setAvailability(eu.onionsoftware.wimf.Wimf.Availability value) {
+        if (availabilityBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          availability_ = value;
+          onChanged();
+        } else {
+          availabilityBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+       */
+      public Builder setAvailability(
+          eu.onionsoftware.wimf.Wimf.Availability.Builder builderForValue) {
+        if (availabilityBuilder_ == null) {
+          availability_ = builderForValue.build();
+          onChanged();
+        } else {
+          availabilityBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+       */
+      public Builder mergeAvailability(eu.onionsoftware.wimf.Wimf.Availability value) {
+        if (availabilityBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              availability_ != eu.onionsoftware.wimf.Wimf.Availability.getDefaultInstance()) {
+            availability_ =
+              eu.onionsoftware.wimf.Wimf.Availability.newBuilder(availability_).mergeFrom(value).buildPartial();
+          } else {
+            availability_ = value;
+          }
+          onChanged();
+        } else {
+          availabilityBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+       */
+      public Builder clearAvailability() {
+        if (availabilityBuilder_ == null) {
+          availability_ = eu.onionsoftware.wimf.Wimf.Availability.getDefaultInstance();
+          onChanged();
+        } else {
+          availabilityBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.Availability.Builder getAvailabilityBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getAvailabilityFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+       */
+      public eu.onionsoftware.wimf.Wimf.AvailabilityOrBuilder getAvailabilityOrBuilder() {
+        if (availabilityBuilder_ != null) {
+          return availabilityBuilder_.getMessageOrBuilder();
+        } else {
+          return availability_;
+        }
+      }
+      /**
+       * <code>optional .eu.onionsoftware.wimf.Availability availability = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          eu.onionsoftware.wimf.Wimf.Availability, eu.onionsoftware.wimf.Wimf.Availability.Builder, eu.onionsoftware.wimf.Wimf.AvailabilityOrBuilder> 
+          getAvailabilityFieldBuilder() {
+        if (availabilityBuilder_ == null) {
+          availabilityBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              eu.onionsoftware.wimf.Wimf.Availability, eu.onionsoftware.wimf.Wimf.Availability.Builder, eu.onionsoftware.wimf.Wimf.AvailabilityOrBuilder>(
+                  getAvailability(),
+                  getParentForChildren(),
+                  isClean());
+          availability_ = null;
+        }
+        return availabilityBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:eu.onionsoftware.wimf.WimfInfo)
     }
 
@@ -2031,6 +4392,21 @@ public final class Wimf {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_eu_onionsoftware_wimf_Login_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_eu_onionsoftware_wimf_UserInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_eu_onionsoftware_wimf_UserInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_eu_onionsoftware_wimf_Location_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_eu_onionsoftware_wimf_Location_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_eu_onionsoftware_wimf_Availability_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_eu_onionsoftware_wimf_Availability_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_eu_onionsoftware_wimf_WimfInfo_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -2047,10 +4423,21 @@ public final class Wimf {
       "\n\nwimf.proto\022\025eu.onionsoftware.wimf\"1\n\007M" +
       "essage\022\014\n\004from\030\001 \001(\005\022\n\n\002to\030\002 \002(\005\022\014\n\004text" +
       "\030\003 \002(\t\"4\n\005Login\022\020\n\010nickname\030\001 \002(\t\022\r\n\005ima" +
-      "ge\030\002 \001(\014\022\n\n\002id\030\003 \001(\005\"h\n\010WimfInfo\022/\n\007mess" +
-      "age\030\001 \001(\0132\036.eu.onionsoftware.wimf.Messag" +
-      "e\022+\n\005login\030\002 \001(\0132\034.eu.onionsoftware.wimf" +
-      ".Login"
+      "ge\030\002 \001(\014\022\n\n\002id\030\003 \001(\005\"C\n\010UserInfo\022\n\n\002id\030\001" +
+      " \002(\005\022+\n\005login\030\002 \001(\0132\034.eu.onionsoftware.w" +
+      "imf.Login\"@\n\010Location\022\020\n\010latitude\030\001 \002(\001\022" +
+      "\021\n\tlongitude\030\002 \002(\001\022\017\n\007user_id\030\003 \001(\005\"\227\001\n\014" +
+      "Availability\022\017\n\007user_id\030\001 \002(\005\022:\n\006status\030" +
+      "\002 \001(\0162*.eu.onionsoftware.wimf.Availabili" +
+      "ty.Status\":\n\006Status\022\014\n\010IN_RANGE\020\000\022\020\n\014OUT",
+      "_OF_RANGE\020\001\022\020\n\014DISCONNECTED\020\002\"\212\002\n\010WimfIn" +
+      "fo\022+\n\005login\030\001 \001(\0132\034.eu.onionsoftware.wim" +
+      "f.Login\022/\n\007message\030\002 \001(\0132\036.eu.onionsoftw" +
+      "are.wimf.Message\0221\n\010location\030\003 \001(\0132\037.eu." +
+      "onionsoftware.wimf.Location\0222\n\tuser_info" +
+      "\030\004 \001(\0132\037.eu.onionsoftware.wimf.UserInfo\022" +
+      "9\n\014availability\030\005 \001(\0132#.eu.onionsoftware" +
+      ".wimf.Availability"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2076,12 +4463,30 @@ public final class Wimf {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_eu_onionsoftware_wimf_Login_descriptor,
         new java.lang.String[] { "Nickname", "Image", "Id", });
-    internal_static_eu_onionsoftware_wimf_WimfInfo_descriptor =
+    internal_static_eu_onionsoftware_wimf_UserInfo_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_eu_onionsoftware_wimf_UserInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_eu_onionsoftware_wimf_UserInfo_descriptor,
+        new java.lang.String[] { "Id", "Login", });
+    internal_static_eu_onionsoftware_wimf_Location_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_eu_onionsoftware_wimf_Location_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_eu_onionsoftware_wimf_Location_descriptor,
+        new java.lang.String[] { "Latitude", "Longitude", "UserId", });
+    internal_static_eu_onionsoftware_wimf_Availability_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_eu_onionsoftware_wimf_Availability_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_eu_onionsoftware_wimf_Availability_descriptor,
+        new java.lang.String[] { "UserId", "Status", });
+    internal_static_eu_onionsoftware_wimf_WimfInfo_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_eu_onionsoftware_wimf_WimfInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_eu_onionsoftware_wimf_WimfInfo_descriptor,
-        new java.lang.String[] { "Message", "Login", });
+        new java.lang.String[] { "Login", "Message", "Location", "UserInfo", "Availability", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
